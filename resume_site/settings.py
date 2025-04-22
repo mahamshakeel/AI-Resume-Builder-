@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +28,9 @@ SECRET_KEY = 'django-insecure-gr2ulrdqvynbg^$!zc0tb43vjj#fkl%ulpb&w7av7-xps5p##-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+ALLOWED_HOSTS = ['ai-resume-builder-3goo.onrender.com']
 
 # Application definition
 
