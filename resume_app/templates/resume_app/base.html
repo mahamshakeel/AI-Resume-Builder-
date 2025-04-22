@@ -1,0 +1,114 @@
+<!-- resume_app/templates/resume_app/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --resume-bg: #ffffff;
+            --heading-color: #1d3557;
+            --accent-color: #2a9d8f;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1c1e22;
+            --text-color: #ccc;
+            --resume-bg: #2c2f33;
+            --heading-color: #f4f4f4;
+            --accent-color: #00b894;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container, #resume {
+            max-width: 850px;
+            margin: auto;
+            background: var(--resume-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+        }
+
+        p, li {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .tools {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-download, .btn-theme {
+            display: inline-block;
+            margin: 10px 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn-theme {
+            background: #444;
+        }
+
+        .btn-download:hover, .btn-theme:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="tools">
+        <button onclick="generatePDF('resume')" class="btn-download">📄 Download PDF</button>
+        <button onclick="toggleTheme()" class="btn-theme">🌓 Toggle Theme</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF(containerId) {
+            const container = document.getElementById(containerId);
+            html2pdf().from(container).save("resume.pdf");
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const current = body.getAttribute("data-theme");
+            const newTheme = current === "light" ? "dark" : "light";
+            body.setAttribute("data-theme", newTheme);
+        }
+    </script>
+</body>
+</html>

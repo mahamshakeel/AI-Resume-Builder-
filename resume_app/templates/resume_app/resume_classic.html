@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --header-color: #1d3557;
+            --highlight: #2a9d8f;
+            --card-bg: white;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1c1e22;
+            --text-color: #ccc;
+            --header-color: #f4f4f4;
+            --highlight: #00b894;
+            --card-bg: #2c2f33;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 10px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1, h2 {
+            color: var(--header-color);
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            color: var(--highlight);
+            margin-top: 0;
+        }
+
+        p, li {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .btn-download, .btn-theme {
+            display: inline-block;
+            margin: 20px 10px 10px 0;
+            background: var(--highlight);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .contact-info p {
+            margin: 4px 0;
+        }
+
+        .section-title {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .links a {
+            color: var(--highlight);
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .tools {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+<div class="container" id="resume">
+    <h1>{{ name }}</h1>
+    <h3>{{ about }}</h3>
+
+    <div class="contact-info section">
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Phone:</strong> {{ phone }}</p>
+        <p><strong>Age:</strong> {{ age }}</p>
+        <div class="links">
+            <p><strong>Portfolio:</strong> <a href="https://yourportfolio.com" target="_blank">yourportfolio.com</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourname" target="_blank">linkedin.com/in/yourname</a></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Skills</h2>
+        <ul>
+            <li>{{ skill1 }}</li>
+            <li>{{ skill2 }}</li>
+            <li>{{ skill3 }}</li>
+            <li>{{ skill4 }}</li>
+            <li>{{ skill5 }}</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Education</h2>
+        <ul>
+            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
+            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
+            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Languages</h2>
+        <ul>
+            <li>{{ lang1 }}</li>
+            <li>{{ lang2 }}</li>
+            <li>{{ lang3 }}</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Projects</h2>
+        <ul>
+            <li><strong>{{ project1 }}</strong> ({{ durat1 }})<br>{{ desc1 }}</li>
+            <li><strong>{{ project2 }}</strong> ({{ durat2 }})<br>{{ desc2 }}</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Experience</h2>
+        <ul>
+            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
+            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Achievements</h2>
+        <ul>
+            <li>{{ ach1 }}</li>
+            <li>{{ ach2 }}</li>
+            <li>{{ ach3 }}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="tools">
+    <button onclick="generatePDF('resume')" class="btn-download">📄 Download PDF</button>
+    <button onclick="toggleTheme()" class="btn-theme">🌓 Toggle Theme</button>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+    function generatePDF(containerId) {
+        const container = document.getElementById(containerId);
+        html2pdf().from(container).save("resume.pdf");
+    }
+
+    function toggleTheme() {
+        const body = document.body;
+        const current = body.getAttribute("data-theme");
+        body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+</script>
+
+</body>
+</html>

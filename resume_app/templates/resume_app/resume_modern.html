@@ -1,0 +1,48 @@
+{% extends "resume_app/base.html" %}
+{% block content %}
+<div class="container" id="resume" style="display:flex; flex-wrap:wrap; gap:30px;">
+    <div style="flex:1; background:#2a9d8f; color:white; padding:20px; border-radius:12px;">
+        <h2>{{ name }}</h2>
+        <h4>{{ about }}</h4>
+        <p><strong>Email:</strong><br>{{ email }}</p>
+        <p><strong>Phone:</strong><br>{{ phone }}</p>
+        <p><strong>Age:</strong><br>{{ age }}</p>
+
+        <h3>Skills</h3>
+        <ul>
+            <li>{{ skill1 }}</li><li>{{ skill2 }}</li><li>{{ skill3 }}</li><li>{{ skill4 }}</li><li>{{ skill5 }}</li>
+        </ul>
+
+        <h3>Languages</h3>
+        <ul>
+            <li>{{ lang1 }}</li><li>{{ lang2 }}</li><li>{{ lang3 }}</li>
+        </ul>
+    </div>
+
+    <div style="flex:2; padding:20px;">
+        <h3>Education</h3>
+        <ul>
+            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
+            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
+            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+        </ul>
+
+        <h3>Projects</h3>
+        <ul>
+            <li><strong>{{ project1 }}</strong> - {{ durat1 }}<br>{{ desc1 }}</li>
+            <li><strong>{{ project2 }}</strong> - {{ durat2 }}<br>{{ desc2 }}</li>
+        </ul>
+
+        <h3>Experience</h3>
+        <ul>
+            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
+            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        </ul>
+
+        <h3>Achievements</h3>
+        <ul>
+            <li>{{ ach1 }}</li><li>{{ ach2 }}</li><li>{{ ach3 }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

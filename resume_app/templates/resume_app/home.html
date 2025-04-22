@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Builder - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            padding: 30px;
+        }
+        h1 {
+            font-family: 'Roboto';
+            text-align: center;
+            color: #009898;
+            font-weight: 80px;
+            
+        }
+        form {
+            max-width: 900px;
+            margin: auto;
+            background: #0100002c;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #636363;
+        }
+        .inline-group {
+            display: flex;
+            gap: 15px;
+        }
+        .inline-group input {
+            flex: 1;
+        }
+        button {
+            display: block;
+            margin: auto;
+            background-color: #00bca6;
+            color: rgb(0, 0, 0);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #cdcffe;
+        }
+    </style>
+</head>
+<body>
+    
+</select>
+
+    <h1>Resume Builder</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="template">Choose Template:</label>
+    <select name="template">
+      <option value="classic">Classic</option>
+      <option value="modern">Modern</option>
+      <option value="creative">Creative</option>
+    </select>
+
+    <button type="submit">Submit</button>
+
+        <div class="section">
+            <h2>Personal Information</h2>
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>About</label>
+            <input type="text" name="about">
+            <label>Age</label>
+            <input type="text" name="age">
+            <label>Email</label>
+            <input type="text" name="email">
+            <label>Phone</label>
+            <input type="text" name="phone">
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="inline-group">
+                <input type="text" name="skill1" placeholder="Skill 1">
+                <input type="text" name="skill2" placeholder="Skill 2">
+                <input type="text" name="skill3" placeholder="Skill 3">
+                <input type="text" name="skill4" placeholder="Skill 4">
+                <input type="text" name="skill5" placeholder="Skill 5">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <label>Degree 1</label>
+            <input type="text" name="degree1">
+            <label>College 1</label>
+            <input type="text" name="college1">
+            <label>Year 1</label>
+            <input type="text" name="year1">
+            <label>Degree 2</label>
+            <input type="text" name="degree2">
+            <label>College 2</label>
+            <input type="text" name="college2">
+            <label>Year 2</label>
+            <input type="text" name="year2">
+            <label>Degree 3</label>
+            <input type="text" name="degree3">
+            <label>College 3</label>
+            <input type="text" name="college3">
+            <label>Year 3</label>
+            <input type="text" name="year3">
+        </div>
+
+        <div class="section">
+            <h2>Languages</h2>
+            <input type="text" name="lang1">
+            <input type="text" name="lang2">
+            <input type="text" name="lang3">
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <label>Project 1 Title</label>
+            <input type="text" name="project1">
+            <label>Duration</label>
+            <input type="text" name="durat1">
+            <label>Description</label>
+            <input type="text" name="desc1">
+            <label>Project 2 Title</label>
+            <input type="text" name="project2">
+            <label>Duration</label>
+            <input type="text" name="durat2">
+            <label>Description</label>
+            <input type="text" name="desc2">
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <label>Company 1</label>
+            <input type="text" name="company1">
+            <label>Post</label>
+            <input type="text" name="post1">
+            <label>Duration</label>
+            <input type="text" name="duration1">
+            <label>Description</label>
+            <input type="text" name="lin11">
+            <label>Company 2</label>
+            <input type="text" name="company2">
+            <label>Post</label>
+            <input type="text" name="post2">
+            <label>Duration</label>
+            <input type="text" name="duration2">
+            <label>Description</label>
+            <input type="text" name="lin21">
+        </div>
+
+        <div class="section">
+            <h2>Achievements</h2>
+            <input type="text" name="ach1" placeholder="Achievement 1">
+            <input type="text" name="ach2" placeholder="Achievement 2">
+            <input type="text" name="ach3" placeholder="Achievement 3">
+        </div>
+
+        <button type="submit">Generate Resume</button>
+    </form>
+</body>
+</html>
