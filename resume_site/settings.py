@@ -30,7 +30,7 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-ALLOWED_HOSTS = ['ai-resume-builder-3goo.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ai-resume-builder-3goo.onrender.com']
 
 # Application definition
 

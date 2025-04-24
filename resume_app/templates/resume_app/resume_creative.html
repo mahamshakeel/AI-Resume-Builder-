@@ -1,44 +1,173 @@
-{% extends "resume_app/base.html" %}
-{% block content %}
-<div class="container" id="resume" style="border: 3px dashed #2c3e50; padding: 30px; border-radius: 20px;">
-    <h1 style="color:#e74c3c;">{{ name }}</h1>
-    <h4 style="color:#3498db;">{{ about }}</h4>
+{% extends 'resume_app/base.html' %}
 
-    <div style="margin-top:20px;">
+{% block content %}
+<style>
+    :root {
+        --light-bg: linear-gradient(135deg, #f3ec78, #af4261, #00c9ff, #92fe9d);
+        --dark-bg: linear-gradient(135deg, #000000, #e37676, #2d2c2c, #000000);
+    }
+
+    body {
+        background: var(--light-bg);
+        background-size: 600% 600%;
+        animation: moveBg 18s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+        transition: background 0.5s;
+    }
+
+    [data-theme="dark"] body {
+        background: var(--dark-bg);
+    }
+
+    @keyframes moveBg {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px 40px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #ffb347;
+        margin-bottom: 5px;
+    }
+
+    h4 {
+        color: #f2f2f2;
+        margin-top: 0;
+        font-weight: normal;
+    }
+
+    h2 {
+        margin-top: 30px;
+        color: #ffeaa7;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    ul li {
+        line-height: 1.6;
+        font-size: 15px;
+    }
+
+    hr {
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .score-section {
+        text-align: center;
+        margin-top: 30px;
+        color: black;
+    }
+
+    .score-section p {
+        font-weight: bold;
+    }
+</style>
+
+<!-- Resume Score Display -->
+<div class="score-section fade-in">
+    <h2>Resume Score: {{ resume_score }}/30</h2>
+    {% if resume_score >= 25 %}
+        <p>🎉 Excellent! Your resume is well optimized.</p>
+    {% elif resume_score >= 15 %}
+        <p>⚠️ Good, but it can be improved!</p>
+    {% else %}
+        <p>❌ Needs improvement. Add more relevant content.</p>
+    {% endif %}
+</div>
+
+<!-- Resume Body -->
+<div class="container fade-in" id="resume">
+    <h1>{{ name }}</h1>
+    <h4>{{ about }}</h4>
+
+    <div>
         <strong>Email:</strong> {{ email }}<br>
         <strong>Phone:</strong> {{ phone }}<br>
         <strong>Age:</strong> {{ age }}
     </div>
 
-    <hr style="margin: 20px 0;">
+    <hr>
 
-    <h2 style="color:#9b59b6;">Skills</h2>
+    <h2>💼 Skills</h2>
     <ul>
         <li>{{ skill1 }}</li><li>{{ skill2 }}</li><li>{{ skill3 }}</li><li>{{ skill4 }}</li><li>{{ skill5 }}</li>
     </ul>
 
-    <h2 style="color:#2ecc71;">Education</h2>
+    <h2>🎓 Education</h2>
     <ul>
         <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
         <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
         <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
     </ul>
 
-    <h2 style="color:#f39c12;">Projects</h2>
+    <h2>🚀 Projects</h2>
     <ul>
         <li><strong>{{ project1 }}</strong> - {{ durat1 }}<br>{{ desc1 }}</li>
         <li><strong>{{ project2 }}</strong> - {{ durat2 }}<br>{{ desc2 }}</li>
     </ul>
 
-    <h2 style="color:#e67e22;">Experience</h2>
+    <h2>🧳 Experience</h2>
     <ul>
-        <li>{{ company1 }} – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-        <li>{{ company2 }} – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
+        <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
     </ul>
 
-    <h2 style="color:#1abc9c;">Achievements</h2>
+    <h2>🏆 Achievements</h2>
     <ul>
         <li>{{ ach1 }}</li><li>{{ ach2 }}</li><li>{{ ach3 }}</li>
     </ul>
 </div>
+
+<!-- PDF Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+    function generatePDF(containerId) {
+        const element = document.getElementById(containerId);
+
+        const opt = {
+            margin: 0,
+            filename: 'resume.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 3, useCORS: true },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
+
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
 {% endblock %}

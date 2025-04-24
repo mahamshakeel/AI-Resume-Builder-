@@ -53,17 +53,47 @@ def home(request):
             'ach2': request.POST.get('ach2'),
             'ach3': request.POST.get('ach3'),
         }
+        resume_score = calculate_resume_score(context)
+        context['resume_score'] = resume_score
 
         # Handle template choice
         template_choice = request.POST.get('template')  # get value from dropdown
 
         if template_choice == 'modern':
-            return render(request, 'resume_app/resume_modern.html', context)
+            #return render(request, 'resume_app/resume_modern.html', context)
+            return render(request, 'resume_app/resume_modern.html', {**context, 'hide_navbar': True})
+
         elif template_choice == 'creative':
-            return render(request, 'resume_app/resume_creative.html', context)
+            #return render(request, 'resume_app/resume_creative.html', context)
+            return render(request, 'resume_app/resume_creative.html', {**context, 'hide_navbar': True})
+
         else:
             return render(request, 'resume_app/resume_classic.html', context)
 
     return render(request, 'resume_app/home.html')
 
-     
+def about(request):
+    return render(request, 'resume_app/about.html')
+
+
+def calculate_resume_score(data):
+    score = 0
+
+    # 1. Resume Length
+    all_text = " ".join(str(v) for v in data.values() if v)
+    word_count = len(all_text.split())
+    if 200 <= word_count <= 600:
+        score += 10
+    elif 150 <= word_count <= 750:
+        score += 5
+
+    # 2. Keyword Check
+    target_keywords = ['python', 'django', 'ml', 'data', 'api', 'project', 'resume', 'analysis']
+    matched = [kw for kw in target_keywords if kw.lower() in all_text.lower()]
+    score += min(len(matched), 10)  # up to 10 points for keyword presence
+
+    # 3. ATS Friendly
+    if '-' in all_text or '*' in all_text or '•' in all_text:
+        score += 10  # bullet points or ATS format hints
+
+    return score

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        
         :root {
             --bg-color: #f0f2f5;
             --text-color: #333;
@@ -86,6 +87,47 @@
     </style>
 </head>
 <body data-theme="light">
+    <style>
+        .navbar {
+            background-color: #2e8b57;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+    
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+    
+        .navbar a:hover {
+            color: #d4ffd6;
+        }
+    
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    
+    {% if not hide_navbar %}
+    <div class="navbar">
+        <div class="navbar-brand">💼 Resume Builder</div>
+        <div>
+            <a href="{% url 'home' %}">🏠 Home</a>
+            <a href="{% url 'about' %}">📞 About</a>
+        </div>
+    </div>
+    {% endif %}
+    
+    
+    <a href="{% url 'about' %}">About / Contact</a>
+
 
     {% block content %}
     {% endblock %}

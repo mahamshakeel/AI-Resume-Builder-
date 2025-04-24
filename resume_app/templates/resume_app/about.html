@@ -1,0 +1,125 @@
+{% extends 'resume_app/base.html' %}
+
+ {% block content %}
+ <style>
+     body {
+         background: linear-gradient(135deg, #89f7fe, #66a6ff, #dcb0ed);
+         background-size: 600% 600%;
+         animation: gradientAnimation 15s ease infinite;
+         font-family: 'Segoe UI', sans-serif;
+     }
+ 
+     @keyframes gradientAnimation {
+         0% { background-position: 0% 50%; }
+         50% { background-position: 100% 50%; }
+         100% { background-position: 0% 50%; }
+     }
+ 
+     .about-container {
+         max-width: 900px;
+         margin: 60px auto;
+         padding: 40px;
+         border-radius: 16px;
+         background: rgba(255, 255, 255, 0.12);
+         backdrop-filter: blur(16px);
+         -webkit-backdrop-filter: blur(16px);
+         border: 2px solid rgba(255, 255, 255, 0.2);
+         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+         color: #050505;
+         animation: fadeInUp 0.8s ease-out forwards;
+     }
+ 
+     .about-container h1 {
+         font-size: 36px;
+         margin-bottom: 20px;
+         color: #000000;
+         border-bottom: 2px dashed rgba(255,255,255,0.3);
+         padding-bottom: 10px;
+     }
+ 
+     .about-container h2 {
+         font-size: 24px;
+         margin-top: 30px;
+         color: #1a16ff;
+     }
+ 
+     .about-container p, .about-container ul {
+         font-size: 16px;
+         line-height: 1.7;
+         margin-bottom: 15px;
+     }
+ 
+     .about-container ul {
+         list-style: none;
+         padding-left: 0;
+     }
+ 
+     .about-container ul li {
+         margin-bottom: 10px;
+     }
+ 
+     .about-container a {
+         color: #000000;
+         font-weight: bold;
+         text-decoration: underline;
+     }
+ 
+     .about-container a:hover {
+         color: #2f5bfd;
+     }
+ 
+     .fade-in {
+         opacity: 0;
+         transform: translateY(20px);
+         animation: fadeInUp 0.6s ease-out forwards;
+     }
+ 
+     @keyframes fadeInUp {
+         to {
+             opacity: 1;
+             transform: translateY(0);
+         }
+     }
+ 
+     .back-button {
+         text-align: center;
+         margin-top: 40px;
+     }
+ 
+     .back-button a {
+         background-color: #7e7e7e33;
+         padding: 12px 25px;
+         color: rgb(0, 0, 0);
+         border-radius: 10px;
+         font-weight: bold;
+         text-decoration: none;
+         transition: all 0.3s ease;
+         border: 1px solid rgba(255,255,255,0.3);
+     }
+ 
+     .back-button a:hover {
+         background-color: #2fff4a55;
+     }
+ </style>
+ 
+ <div class="back-button">
+     <a href="{% url 'home' %}">← Back to Home</a>
+ </div>
+ 
+ <div class="about-container fade-in">
+     <h1>About This Resume Builder</h1>
+     <p>This resume builder is designed to help job seekers quickly create professional, ATS-friendly resumes online — built by <strong>Maham Shakeel</strong>, an AI and Data Science enthusiast based in Dubai.</p>
+ 
+     <p>The project offers multiple templates, downloadable PDFs, and dynamic sections like Skills, Projects, and Experience — all without logging in!</p>
+ 
+     <h2>Contact Maham</h2>
+     <ul>
+         <li><strong>Email:</strong> <a href="mailto:maham546@gmail.com">maham546@gmail.com</a></li>
+         <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/maham-shakeel-951827252/" target="_blank">linkedin.com/in/maham-shakeel</a></li>
+         <li><strong>GitHub:</strong> <a href="https://github.com/mahamshakeel" target="_blank">github.com/mahamshakeel</a></li>
+     </ul>
+ 
+     <p>Have ideas, suggestions, or want to collaborate? I’d love to hear from you!</p>
+ </div>
+ {% endblock %}
+ 
