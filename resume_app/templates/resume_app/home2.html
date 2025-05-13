@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart CV Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            background-color: #343a40;
+            padding-top: 60px;
+        }
+        .sidebar .nav-link {
+            color: #fff;
+        }
+        .sidebar .nav-link.active {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar d-flex flex-column">
+        <a class="navbar-brand text-center text-white mb-4" href="#">Smart CV</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-section="personal-info">Personal Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="education">Education</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="languages">Languages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="experience">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-section="achievements">Achievements</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Resume Builder Dashboard</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Personal Info Section -->
+            <div id="personal-info" class="form-section active">
+                <h3>Personal Information</h3>
+                <div class="mb-3">
+                    <label for="template" class="form-label">Choose Template:</label>
+                    <select name="template" id="template" class="form-select">
+                        <option value="classic">Classic</option>
+                        <option value="modern">Modern</option>
+                        <option value="creative">Creative</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="about" class="form-label">About</label>
+                    <input type="text" name="about" id="about" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="text" name="age" id="age" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" id="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control">
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div id="skills" class="form-section">
+                <h3>Skills</h3>
+                <div class="mb-3">
+                    <input type="text" name="skill1" placeholder="Skill 1" class="form-control mb-2">
+                    <input type="text" name="skill2" placeholder="Skill 2" class="form-control mb-2">
+                    <input type="text" name="skill3" placeholder="Skill 3" class="form-control mb-2">
+                    <input type="text" name="skill4" placeholder="Skill 4" class="form-control mb-2">
+                    <input type="text" name="skill5" placeholder="Skill 5" class="form-control mb-2">
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div id="education" class="form-section">
+                <h3>Education</h3>
+                <div class="mb-3">
+                    <label for="degree1" class="form-label">Degree 1</label>
+                    <input type="text" name="degree1" id="degree1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="college1" class="form-label">College 1</label>
+                    <input type="text" name="college1" id="college1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="year1" class="form-label">Year 1</label>
+                    <input type="text" name="year1" id="year1" class="form-control">
+                </div>
+                <!-- Repeat for Degree 2 and 3 as needed -->
+            </div>
+
+            <!-- Languages Section -->
+            <div id="languages" class="form-section">
+                <h3>Languages</h3>
+                <div class="mb-3">
+                    <input type="text" name="lang1" placeholder="Language 1" class="form-control mb-2">
+                    <input type="text" name="lang2" placeholder="Language 2" class="form-control mb-2">
+                    <input type="text" name="lang3" placeholder="Language 3" class="form-control mb-2">
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projects" class="form-section">
+                <h3>Projects</h3>
+                <div class="mb-3">
+                    <label for="project1" class="form-label">Project 1 Title</label>
+                    <input type="text" name="project1" id="project1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="durat1" class="form-label">Duration</label>
+                    <input type="text" name="durat1" id="durat1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="desc1" class="form-label">Description</label>
+                    <input type="text" name="desc1" id="desc1" class="form-control">
+                </div>
+                <!-- Repeat for Project 2 as needed -->
+            </div>
+
+            <!-- Experience Section -->
+            <div id="experience" class="form-section">
+                <h3>Experience</h3>
+                <div class="mb-3">
+                    <label for="company1" class="form-label">Company 1</label>
+                    <input type="text" name="company1" id="company1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="post1" class="form-label">Post</label>
+                    <input type="text" name="post1" id="post1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="duration1" class="form-label">Duration</label>
+                    <input type="text" name="duration1" id="duration1" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="lin11" class="form-label">Description</label>
+                    <input type="text" name="lin11" id="lin11" class="form-control">
+                </div>
+                <!-- Repeat for Company 2 as needed -->
+            </div>
+
+            <!-- Achievements Section -->
+            <div id="achievements" class="form-section">
+                <h3>Achievements</h3>
+                <div class="mb-3">
+                    <input type="text" name="ach1" placeholder="Achievement 1" class="form-control mb-2">
+                    <input type="text" name="ach2" placeholder="Achievement 2" class="form-control mb-2">
+                    <input type="text" name="ach3" placeholder="Achievement 3" class="form-control mb-2">
+                </div>
+                <button class="btn btn-primary" type="submit">Generate Resume</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+                // Add active class to the clicked link
+                this.classList.add('active');
+                // Hide all form sections
+                document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+                // Show the selected form section
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+::contentReference[oaicite:0]{index=0}
+ 

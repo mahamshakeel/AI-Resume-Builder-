@@ -4,69 +4,64 @@
     <meta charset="UTF-8">
     <title>{{ name }} - Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-light: linear-gradient(-45deg, #5aff96, #e5ff73, #4cfffc, #ff2ac3);
-            --bg-dark: linear-gradient(-45deg, #1f1f1f, #9d9d9d, #cb8181, #303030);
-            --text-light: #333;
-            --text-dark: #eee;
-            --card-bg-light: rgba(255, 255, 255, 0.15);
-            --card-bg-dark: rgba(0, 0, 0, 0.4);
-            --highlight: #00c896;
+            --light-bg: #ffffff;
+            --dark-bg: #121212;
+            --light-text: #222;
+            --dark-text: #f1f1f1;
+            --primary: #007b83;
+            --border: #e0e0e0;
         }
 
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            transition: all 0.4s ease;
-            background: var(--bg-light);
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
+            padding: 30px 15px;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: all 0.3s ease;
         }
 
         body[data-theme="dark"] {
-            background: var(--bg-dark);
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 900px;
+        .resume-container {
+            max-width: 850px;
             margin: auto;
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            background: var(--card-bg-light);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background-color: #f9f9f9;
         }
 
-        body[data-theme="dark"] .container {
-            background: var(--card-bg-dark);
-            color: var(--text-dark);
+        body[data-theme="dark"] .resume-container {
+            background-color: #1e1e1e;
+            border-color: #333;
         }
 
-        h1, h2 {
-            margin-bottom: 8px;
-            color: var(--highlight);
+        h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        h2.section-title {
+            font-size: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: var(--primary);
         }
 
         h3 {
-            margin-top: 0;
-            color: #000000;
+            margin-top: 5px;
+            color: inherit;
+            font-weight: normal;
         }
 
         p, li {
@@ -78,15 +73,12 @@
             padding-left: 20px;
         }
 
-        .section {
-            margin-top: 35px;
+        .info {
+            margin: 20px 0;
         }
 
-        .section-title {
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-size: 20px;
+        .info p {
+            margin: 6px 0;
         }
 
         .tools {
@@ -94,167 +86,125 @@
             margin-top: 30px;
         }
 
-        .btn-download, .btn-theme {
-            background: var(--highlight);
-            color: white;
-            padding: 10px 22px;
+        .btn {
+            background-color: var(--primary);
+            color: #fff;
             border: none;
-            border-radius: 8px;
-            margin: 10px 8px;
+            padding: 10px 18px;
+            border-radius: 5px;
+            margin: 0 10px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
         }
 
-        .btn-download:hover, .btn-theme:hover {
-            background: #009e7e;
+        .btn:hover {
+            background-color: #005f63;
         }
 
-        .links a {
-            color: var(--highlight);
-            text-decoration: none;
+        .score-box {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .container {
-                padding: 25px;
-            }
+        .score-box p {
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body data-theme="light">
-    
-    <div style="text-align: center; margin-top: 25px;">
+
+    <div class="score-box">
         <h3>Resume Score: {{ resume_score }}/30</h3>
         {% if resume_score >= 25 %}
-            <p style="color: #0f9d58;">✅ Excellent! Your resume is highly optimized.</p>
+            <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
         {% elif resume_score >= 15 %}
-            <p style="color: #f4b400;">⚠️ Good, but can be improved.</p>
+            <p style="color: orange;">⚠️ Good, but can be improved.</p>
         {% else %}
-            <p style="color: #db4437;">❌ Needs significant improvement.</p>
+            <p style="color: red;">❌ Needs significant improvement.</p>
         {% endif %}
     </div>
 
-    <div class="container" id="resume">
+    <div class="resume-container" id="resume">
         <h1>{{ name }}</h1>
         <h3>{{ about }}</h3>
 
-        <div class="section">
+        <div class="info">
             <p><strong>Email:</strong> {{ email }}</p>
             <p><strong>Phone:</strong> {{ phone }}</p>
             <p><strong>Age:</strong> {{ age }}</p>
-            <div class="links">
-                <p><strong>Portfolio:</strong> <a href="#">yourportfolio.com</a></p>
-                <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/yourname</a></p>
-            </div>
+            <p><strong>Portfolio:</strong> <a href="#" style="color: var(--primary);">yourportfolio.com</a></p>
+            <p><strong>LinkedIn:</strong> <a href="#" style="color: var(--primary);">linkedin.com/in/yourname</a></p>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">Skills</h2>
-            <ul>
-                <li>{{ skill1 }}</li>
-                <li>{{ skill2 }}</li>
-                <li>{{ skill3 }}</li>
-                <li>{{ skill4 }}</li>
-                <li>{{ skill5 }}</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Skills</h2>
+        <ul>
+            <li>{{ skill1 }}</li>
+            <li>{{ skill2 }}</li>
+            <li>{{ skill3 }}</li>
+            <li>{{ skill4 }}</li>
+            <li>{{ skill5 }}</li>
+        </ul>
 
-        <div class="section">
-            <h2 class="section-title">Education</h2>
-            <ul>
-                <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-                <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-                <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Education</h2>
+        <ul>
+            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
+            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
+            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+        </ul>
 
-        <div class="section">
-            <h2 class="section-title">Languages</h2>
-            <ul>
-                <li>{{ lang1 }}</li>
-                <li>{{ lang2 }}</li>
-                <li>{{ lang3 }}</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Languages</h2>
+        <ul>
+            <li>{{ lang1 }}</li>
+            <li>{{ lang2 }}</li>
+            <li>{{ lang3 }}</li>
+        </ul>
 
-        <div class="section">
-            <h2 class="section-title">Projects</h2>
-            <ul>
-                <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>
-                <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Projects</h2>
+        <ul>
+            <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>
+            <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>
+        </ul>
 
-        <div class="section">
-            <h2 class="section-title">Experience</h2>
-            <ul>
-                <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-                <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Experience</h2>
+        <ul>
+            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
+            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        </ul>
 
-        <div class="section">
-            <h2 class="section-title">Achievements</h2>
-            <ul>
-                <li>{{ ach1 }}</li>
-                <li>{{ ach2 }}</li>
-                <li>{{ ach3 }}</li>
-            </ul>
-        </div>
+        <h2 class="section-title">Achievements</h2>
+        <ul>
+            <li>{{ ach1 }}</li>
+            <li>{{ ach2 }}</li>
+            <li>{{ ach3 }}</li>
+        </ul>
     </div>
+
     <div class="tools">
-        <button onclick="generatePDF('resume')" class="btn-download">📄 Download PDF</button>
-        <button onclick="toggleTheme()" class="btn-theme">🌓 Toggle Theme</button>
+        <button onclick="generatePDF('resume')" class="btn">📄 Download PDF</button>
+        <button onclick="toggleTheme()" class="btn">🌓 Toggle Theme</button>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script>
         function generatePDF(containerId) {
             const element = document.getElementById(containerId);
-    
             const opt = {
-                margin:       0,
-                filename:     'resume.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  {
-                    scale: 4,           // Higher scale = sharper PDF
-                    useCORS: true
-                },
-                jsPDF:        {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
+                margin: 0,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: { scale: 4, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-    
             html2pdf().set(opt).from(element).save();
         }
-   
+
         function toggleTheme() {
             const body = document.body;
             const current = body.getAttribute("data-theme");
             body.setAttribute("data-theme", current === "light" ? "dark" : "light");
         }
     </script>
+
 </body>
 </html>

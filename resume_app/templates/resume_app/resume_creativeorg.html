@@ -2,90 +2,33 @@
 
 {% block content %}
 <style>
+    :root {
+        --light-bg: linear-gradient(135deg, #f3ec78, #af4261, #00c9ff, #92fe9d);
+        --dark-bg: linear-gradient(135deg, #000000, #e37676, #2d2c2c, #000000);
+    }
+
     body {
-        margin: 0;
-        padding: 0;
+        background: var(--light-bg);
+        background-size: 600% 600%;
+        animation: moveBg 18s ease infinite;
         font-family: 'Segoe UI', sans-serif;
-        background: #f5f7fa;
-        color: #333;
+        transition: background 0.5s;
     }
 
-    .container {
-        max-width: 950px;
-        margin: 50px auto;
-        padding: 40px 50px;
-        background: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        animation: fadeInUp 0.7s ease-out forwards;
+    [data-theme="dark"] body {
+        background: var(--dark-bg);
     }
 
-    h1 {
-        font-size: 36px;
-        color: #2c3e50;
-        margin-bottom: 8px;
-        font-weight: 700;
-    }
-
-    h4 {
-        color: #7f8c8d;
-        font-size: 16px;
-        margin-top: 0;
-        font-style: italic;
-    }
-
-    h2 {
-        font-size: 24px;
-        color: #34495e;
-        margin-top: 35px;
-        border-bottom: 1px solid #ecf0f1;
-        padding-bottom: 5px;
-    }
-
-    ul {
-        padding-left: 25px;
-        margin-top: 10px;
-    }
-
-    ul li {
-        line-height: 1.8;
-        font-size: 15px;
-        color: #2f2f2f;
-    }
-
-    hr {
-        border: none;
-        border-top: 1px solid #e0e0e0;
-        margin: 20px 0;
-    }
-
-    .score-section {
-        max-width: 950px;
-        margin: 30px auto 10px;
-        padding: 25px;
-        background: #e8f0fe;
-        border-radius: 12px;
-        text-align: center;
-        color: #1a237e;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        animation: fadeInUp 0.7s ease-out forwards;
-    }
-
-    .score-section h2 {
-        margin: 0;
-        color: #0d47a1;
-    }
-
-    .score-section p {
-        margin: 10px 0 0;
-        font-weight: 600;
+    @keyframes moveBg {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     .fade-in {
         opacity: 0;
         transform: translateY(20px);
-        animation: fadeInUp 0.7s ease-out forwards;
+        animation: fadeInUp 0.6s ease-out forwards;
     }
 
     @keyframes fadeInUp {
@@ -93,6 +36,61 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px 40px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #ffb347;
+        margin-bottom: 5px;
+    }
+
+    h4 {
+        color: #f2f2f2;
+        margin-top: 0;
+        font-weight: normal;
+    }
+
+    h2 {
+        margin-top: 30px;
+        color: #ffeaa7;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    ul li {
+        line-height: 1.6;
+        font-size: 15px;
+    }
+
+    hr {
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .score-section {
+        text-align: center;
+        margin-top: 30px;
+        color: black;
+    }
+
+    .score-section p {
+        font-weight: bold;
     }
 </style>
 
@@ -123,11 +121,7 @@
 
     <h2>💼 Skills</h2>
     <ul>
-        <li>{{ skill1 }}</li>
-        <li>{{ skill2 }}</li>
-        <li>{{ skill3 }}</li>
-        <li>{{ skill4 }}</li>
-        <li>{{ skill5 }}</li>
+        <li>{{ skill1 }}</li><li>{{ skill2 }}</li><li>{{ skill3 }}</li><li>{{ skill4 }}</li><li>{{ skill5 }}</li>
     </ul>
 
     <h2>🎓 Education</h2>
@@ -151,9 +145,7 @@
 
     <h2>🏆 Achievements</h2>
     <ul>
-        <li>{{ ach1 }}</li>
-        <li>{{ ach2 }}</li>
-        <li>{{ ach3 }}</li>
+        <li>{{ ach1 }}</li><li>{{ ach2 }}</li><li>{{ ach3 }}</li>
     </ul>
 </div>
 

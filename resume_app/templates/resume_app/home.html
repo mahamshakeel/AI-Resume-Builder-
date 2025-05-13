@@ -1,173 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Resume Builder - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            background: linear-gradient(-45deg, #84fab0, #60caff, #cf7adc, #e906a8);
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        h1 {
-            text-align: center;
-            color: rgb(13, 13, 13);
-            font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-wrapper {
-            max-width: 900px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            color: rgb(4, 4, 4);
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-top: 15px;
-        }
-
-        input[type="text"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px 14px;
-            margin-bottom: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            background: rgba(255, 255, 255, 0.85);
-            color: #000;
-        }
-
-        .inline-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .inline-group input {
-            flex: 1;
-        }
-
-        .section {
-            margin-top: 20px;
-        }
-
-        button {
-            display: block;
-            margin: 30px auto 0;
-            background-color: #00c896;
+        .sidebar {
+            height: 100vh;
+            background: linear-gradient(180deg, #3c3b6e, #1e1e2f);
             color: white;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s ease;
+            padding-top: 20px;
+            position: fixed;
+            width: 250px;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        button:hover {
-            background-color: #009e7e;
-        }
-
-        .about-link {
+        .sidebar h4 {
             text-align: center;
-            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        label{
+            margin-bottom: 6px;
         }
 
-        .about-link a {
-            color: #fff;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
             text-decoration: none;
             transition: 0.3s;
         }
 
-        .about-link a:hover {
-            background: rgba(0, 0, 0, 0.35);
+        .sidebar a:hover {
+            background-color: #5050a5;
+            border-left: 4px solid #fff;
+        }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .form-section h5 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
-<body>
-    <h1>Resume Builder</h1>
 
-    <div class="form-wrapper">
+<body>
+    <div class="sidebar">
+        <h4><i class="fas fa-user-circle me-2"></i>Smart CV</h4>
+        <a href="#"><i class="fas fa-user me-2"></i> Personal Info</a>
+        <a href="#"><i class="fas fa-bullseye me-2"></i> Skills</a>
+        <a href="#"><i class="fas fa-lightbulb me-2"></i> Skills</a>
+        <a href="#"><i class="fas fa-graduation-cap me-2"></i> Education</a>
+        <a href="#"><i class="fas fa-briefcase me-2"></i> Experience</a>
+        <a href="#"><i class="fas fa-tasks me-2"></i> Projects</a>
+        <a href="#"><i class="fas fa-certificate me-2"></i> Certifications</a>
+        <a href="#"><i class="fas fa-trophy me-2"></i> Achievements</a>
+        <a href="#"><i class="fas fa-language me-2"></i> Languages</a>
+        <a href="#"><i class="fas fa-heart me-2"></i> Hobbies</a>
+    </div>
+
+    <div class="main-content">
         <form method="post">
             {% csrf_token %}
 
-            <label for="template">Choose Template:</label>
-            <select name="template">
-                <option value="classic">Classic</option>
-                <option value="modern">Modern</option>
-                <option value="creative">Creative</option>
-            </select>
-
-            <div class="section">
-                <h2>Personal Information</h2>
-                <label>Name</label>
-                <input type="text" name="name">
-                <label>About</label>
-                <input type="text" name="about">
-                <label>Age</label>
-                <input type="text" name="age">
-                <label>Email</label>
-                <input type="text" name="email">
-                <label>Phone</label>
-                <input type="text" name="phone">
+            <div class="form-section">
+                <h5>Personal Information</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="about">About</label>
+                        <input type="text" class="form-control" name="about" id="about"
+                            placeholder="Tell me about yourself" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Age</label>
+                        <input type="number" class="form-control" name="age" id="age" placeholder="Enter your age" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Enter your email" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Phone</label>
+                        <input type="number" class="form-control" name="phone" id="phone"
+                            placeholder="Enter your phone number" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="template">Choose Template</label>
+                        <select class="form-control" name="template" id="template">
+                            <option value="classic">Classic</option>
+                            <option value="modern">Modern</option>
+                            <option value="creative">Creative</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Skills</h2>
-                <div class="inline-group">
+
+
+
+            <div class="form-section">
+                <h5>Education: Tell us about your education</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="degree1">Degree 1</label>
+                        <input type="text" class="form-control" name="degree1" id="degree1"
+                            placeholder="Enter your degree" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="college1">College 1</label>
+                        <input type="text" class="form-control" name="college1" id="college1"
+                            placeholder="Enter your college" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="year1">Year 1</label>
+                        <input type="text" class="form-control" name="year1" id="year1" placeholder="Enter your year" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="degree2">Degree 2</label>
+                        <input type="text" class="form-control" name="degree2" id="degree2"
+                            placeholder="Enter your degree" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="college2">College 2</label>
+                        <input type="text" class="form-control" name="college2" id="college2"
+                            placeholder="Enter your college" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="year2">Year 2</label>
+                        <input type="text" class="form-control" name="year2" id="year2" placeholder="Enter your year" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="degree3">Degree 3</label>
+                        <input type="text" class="form-control" name="degree3" id="degree3"
+                            placeholder="Enter your degree" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="college3">College 3</label>
+                        <input type="text" class="form-control" name="college3" id="college3"
+                            placeholder="Enter your college" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="year3">Year 3</label>
+                        <input type="text" class="form-control" name="year3" id="year3" placeholder="Enter your year" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5>Experience: Tell us about your work experience</h5>
+                <div class="row g-3">
+                    <!-- Experience 1 -->
+                    <div class="col-md-6">
+                        <label for="company1">Company 1</label>
+                        <input type="text" class="form-control" name="company1" id="company1"
+                            placeholder="Enter company name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post1">Post</label>
+                        <input type="text" class="form-control" name="post1" id="post1"
+                            placeholder="Enter your job title" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="duration1">Duration</label>
+                        <input type="text" class="form-control" name="duration1" id="duration1"
+                            placeholder="e.g. Jan 2020 - Dec 2021" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lin11">Description</label>
+                        <input type="text" class="form-control" name="lin11" id="lin11"
+                            placeholder="Briefly describe your role" />
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="col-md-6">
+                        <label for="company2">Company 2</label>
+                        <input type="text" class="form-control" name="company2" id="company2"
+                            placeholder="Enter company name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post2">Post</label>
+                        <input type="text" class="form-control" name="post2" id="post2"
+                            placeholder="Enter your job title" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="duration2">Duration</label>
+                        <input type="text" class="form-control" name="duration2" id="duration2"
+                            placeholder="e.g. Jan 2019 - Dec 2020" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lin21">Description</label>
+                        <input type="text" class="form-control" name="lin21" id="lin21"
+                            placeholder="Briefly describe your role" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5>Skills : Tell Us What You’re Great At</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label>skill 1</label>
+                        <input type="text" class="form-control" name="skill1" id="skill1"
+                            placeholder="Enter your skill 1" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Skill 2</label>
+                        <input type="text" class="form-control" name="skill2" id="skill2"
+                            placeholder="Tell me about skill 2" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Skill 3</label>
+                        <input type="text" class="form-control" name="skill3" id="skill3"
+                            placeholder="Enter your skill 3" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Skill 4</label>
+                        <input type="text" class="form-control" name="skill4" id="skill4"
+                            placeholder="Enter your skill 4" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Skill 5</label>
+                        <input type="text" class="form-control" name="skill5" id="skill5"
+                            placeholder="Enter your phone skill 5" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-section">
+                <h5>Languages: Mention languages you know</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="lang1" placeholder="Language 1" />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="lang2" placeholder="Language 2" />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="lang3" placeholder="Language 3" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-section">
+                <h5>Projects: Tell us about your projects</h5>
+                <div class="row g-3">
+                    <!-- Project 1 -->
+                    <div class="col-md-6">
+                        <label for="project1">Project 1 Title</label>
+                        <input type="text" class="form-control" name="project1" id="project1"
+                            placeholder="Enter project title" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="durat1">Duration</label>
+                        <input type="text" class="form-control" name="durat1" id="durat1"
+                            placeholder="e.g. Jan 2022 - May 2022" />
+                    </div>
+                    <div class="col-12">
+                        <label for="desc1">Description</label>
+                        <input type="text" class="form-control" name="desc1" id="desc1"
+                            placeholder="Brief description of the project" />
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="col-md-6">
+                        <label for="project2">Project 2 Title</label>
+                        <input type="text" class="form-control" name="project2" id="project2"
+                            placeholder="Enter project title" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="durat2">Duration</label>
+                        <input type="text" class="form-control" name="durat2" id="durat2"
+                            placeholder="e.g. Jun 2022 - Dec 2022" />
+                    </div>
+                    <div class="col-12">
+                        <label for="desc2">Description</label>
+                        <input type="text" class="form-control" name="desc2" id="desc2"
+                            placeholder="Brief description of the project" />
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-section">
+                <h5>Achievements: Mention your top accomplishments</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ach1" placeholder="Achievement 1" />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ach2" placeholder="Achievement 2" />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ach3" placeholder="Achievement 3" />
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generate CV</button>
+            <div class="about-link btn-primary  ">
+                <a href="{% url 'about' %}">📞 About / Contact</a>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- <div class="py-5 w-100" style="background-color: #eef4ff; min-height: 100vh;" id="intro-screen">
+        <div class=" d-flex justify-content-center align-items-center">
+            <div class="bg-white rounded-4 shadow  pb-3 text-center" style="max-width: 600px; width: 100%;">
+
+                <img src="https://www.mycvcreator.com/app/assets/img/bg.jpg" alt="CV Examples" class="img-fluid  w-100"
+                    style="max-height: 273px; " />
+
+                <h2 class="fw-bold mb-2 text-primary mt-3">Smart CV</h2>
+                <h4 class="fw-bold mb-3 text-dark">RESUME BUILDER</h4>
+                <p class="mb-4">Build a <span class="fw-bold text-success">job-winning</span> resume in <span
+                        class="fw-bold text-info">minutes</span>.</p>
+
+               
+                <ul class="list-unstyled text-start d-inline-block mb-0 text-dark">
+                    <li class="mb-2"><i class="text-success me-2">✔</i> Resume Templates</li>
+                    <li class="mb-2"><i class="text-success me-2">✔</i> Fast & Easy to Create</li>
+                    <li class="mb-2"><i class="text-success me-2">✔</i> Modern Resume Designs</li>
+                    <li class="mb-2"><i class="text-success me-2">✔</i> Download PDF, Print </li>
+                    <li class="mb-2"><i class="text-success me-2">✔</i> Step by Step Help & Guide</li>
+                </ul>
+                <div></div>
+                <button class="btn btn-primary btn-lg mt-3" onclick="ViewIntroPage()">Start Building</button>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- <div class="form-wrapper d-none" id="ResumeForm">
+        <form method="post">
+            {% csrf_token %}
+
+            <div id="PersonalInfo">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">What's the best way for employers to contact you?</h2>
+
+                <p>
+                    We suggest including an email and phone number.
+                </p>
+
+                <div class="section">
+                    <label for="template">Choose Template:</label>
+                    <select name="template" id="template">
+                        <option value="classic">Classic</option>
+                        <option value="modern">Modern</option>
+                        <option value="creative">Creative</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <h2>Personal Information</h2>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+
+                    <label for="about">About</label>
+                    <input type="text" name="about" id="about">
+
+                    <label for="age">Age</label>
+                    <input type="text" name="age" id="age">
+
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email">
+
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone">
+                    <div class="d-flex">
+                        <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextSkill()'>
+                            Next : Skills
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section d-none mt-4 mb-5" id="Skills">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">Tell Us What You’re Great At</h2>
+
+               
+
+                <div class="inline-group mt-3">
                     <input type="text" name="skill1" placeholder="Skill 1">
                     <input type="text" name="skill2" placeholder="Skill 2">
                     <input type="text" name="skill3" placeholder="Skill 3">
                     <input type="text" name="skill4" placeholder="Skill 4">
                     <input type="text" name="skill5" placeholder="Skill 5">
                 </div>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextEducation()'>
+                        Next : Education
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Education</h2>
+            <div class="section d-none w-100" id="Education">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">Tell us about your education</h2>
                 <label>Degree 1</label><input type="text" name="degree1">
                 <label>College 1</label><input type="text" name="college1">
                 <label>Year 1</label><input type="text" name="year1">
@@ -177,27 +444,49 @@
                 <label>Degree 3</label><input type="text" name="degree3">
                 <label>College 3</label><input type="text" name="college3">
                 <label>Year 3</label><input type="text" name="year3">
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextLanguages()'>
+                        Next : Languages
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Languages</h2>
-                <input type="text" name="lang1" placeholder="Language 1">
-                <input type="text" name="lang2" placeholder="Language 2">
-                <input type="text" name="lang3" placeholder="Language 3">
+
+            <div class="section d-none" id="Languages">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">What Language would you like to highlight?</h2>
+                <input class="my-3" type="text" name="lang1" placeholder="Language 1">
+                <input class="my-3" type="text" name="lang2" placeholder="Language 2">
+                <input class="my-3" type="text" name="lang3" placeholder="Language 3">
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextProjects()'>
+                        Next : Projects
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Projects</h2>
+            <div class="section d-none" id="Projects">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">Showcasing your work</h2>
                 <label>Project 1 Title</label><input type="text" name="project1">
                 <label>Duration</label><input type="text" name="durat1">
                 <label>Description</label><input type="text" name="desc1">
                 <label>Project 2 Title</label><input type="text" name="project2">
                 <label>Duration</label><input type="text" name="durat2">
                 <label>Description</label><input type="text" name="desc2">
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextExperience()'>
+                        Next : Experience
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Experience</h2>
+            <div class="section d-none" id="Experience">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">Show us your professional journey</h2>
                 <label>Company 1</label><input type="text" name="company1">
                 <label>Post</label><input type="text" name="post1">
                 <label>Duration</label><input type="text" name="duration1">
@@ -206,22 +495,74 @@
                 <label>Post</label><input type="text" name="post2">
                 <label>Duration</label><input type="text" name="duration2">
                 <label>Description</label><input type="text" name="lin21">
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextAchievements()'>
+                        Next : Achievements
+                    </button>
+                </div>
             </div>
 
-            <div class="section">
-                <h2>Achievements</h2>
-                <input type="text" name="ach1" placeholder="Achievement 1">
-                <input type="text" name="ach2" placeholder="Achievement 2">
-                <input type="text" name="ach3" placeholder="Achievement 3">
+            <div class="section d-none" id="Achievements">
+                <h2 style="font-size: 30px;
+                max-width: 88%;
+                font-weight: 600;">Highlight your key achievements</h2>
+                <input class="my-3" type="text" name="ach1" placeholder="Achievement 1">
+                <input class="my-3" type="text" name="ach2" placeholder="Achievement 2">
+                <input class="my-3" type="text" name="ach3" placeholder="Achievement 3">
+                <button class="btn btn-primary btn-lg mt-3 me-0" type="submit">Generate Resume</button>
+                <div class="about-link btn-primary ">
+                    <a href="{% url 'about' %}">📞 About / Contact</a>
+                </div>
             </div>
 
-            <button type="submit">Generate Resume</button>
         </form>
 
-        <div class="about-link">
-            <a href="{% url 'about' %}">📞 About / Contact</a>
-        </div>
-    </div>
-</body>
-</html>
+    </div> -->
+    <script>
+        function ViewIntroPage() {
+            const website = document.getElementById("ResumeForm");
+            const introscreen = document.getElementById("intro-screen");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextSkill() {
+            const website = document.getElementById("Skills");
+            const introscreen = document.getElementById("PersonalInfo");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextEducation() {
+            const website = document.getElementById("Education");
+            const introscreen = document.getElementById("Skills");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextLanguages() {
+            const website = document.getElementById("Languages");
+            const introscreen = document.getElementById("Education");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextProjects() {
+            const website = document.getElementById("Projects");
+            const introscreen = document.getElementById("Languages");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextExperience() {
+            const website = document.getElementById("Experience");
+            const introscreen = document.getElementById("Projects");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+        function nextAchievements() {
+            const website = document.getElementById("Achievements");
+            const introscreen = document.getElementById("Experience");
+            introscreen.classList.add("d-none");
+            website.classList.remove("d-none");
+        }
+    </script>
 
+</body>
+
+</html>
