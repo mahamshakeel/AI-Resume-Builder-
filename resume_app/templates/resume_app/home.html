@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Resume Builder - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
         }
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            background: linear-gradient(-45deg, #84fab0, #60caff, #cf7adc, #e906a8);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #183d3e, #3541e5);
             background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
-            min-height: 100vh;
+            animation: gradientBG 12s ease infinite;
+            color: #ffffff;
         }
 
-        @keyframes gradientMove {
+        @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -26,25 +25,24 @@
 
         h1 {
             text-align: center;
-            color: rgb(13, 13, 13);
             font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            color: #00e6ac;
+            margin-top: 30px;
+            margin-bottom: 10px;
         }
 
-        .form-wrapper {
-            max-width: 900px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+        .form-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            color: rgb(4, 4, 4);
-            animation: fadeInUp 0.6s ease-out forwards;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
         }
 
         @keyframes fadeInUp {
@@ -56,28 +54,26 @@
 
         label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-top: 15px;
+            margin-top: 18px;
+            font-weight: 600;
+            color: #e0e0e0;
         }
 
-        input[type="text"],
-        textarea,
-        select {
+        input, select, textarea {
             width: 100%;
-            padding: 10px 14px;
-            margin-bottom: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: rgb(0, 0, 0);
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 10px;
             outline: none;
-            background: rgba(255, 255, 255, 0.85);
-            color: #000;
+            font-size: 15px;
         }
 
         .inline-group {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -86,25 +82,24 @@
         }
 
         .section {
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         button {
-            display: block;
-            margin: 30px auto 0;
-            background-color: #00c896;
-            color: white;
-            padding: 14px 30px;
+            background: #00e6ac;
+            color: #000;
+            padding: 14px 28px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
             font-weight: bold;
+            font-size: 16px;
+            margin-top: 40px;
             cursor: pointer;
             transition: 0.3s ease;
         }
 
         button:hover {
-            background-color: #009e7e;
+            background: #a6eede;
         }
 
         .about-link {
@@ -113,24 +108,26 @@
         }
 
         .about-link a {
-            color: #fff;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
+            color: #00e6ac;
             text-decoration: none;
-            transition: 0.3s;
+            font-weight: bold;
         }
 
         .about-link a:hover {
-            background: rgba(0, 0, 0, 0.35);
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: #00e6ac;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
+
     <h1>Resume Builder</h1>
 
-    <div class="form-wrapper">
+    <div class="form-container">
         <form method="post">
             {% csrf_token %}
 
@@ -143,16 +140,11 @@
 
             <div class="section">
                 <h2>Personal Information</h2>
-                <label>Name</label>
-                <input type="text" name="name">
-                <label>About</label>
-                <input type="text" name="about">
-                <label>Age</label>
-                <input type="text" name="age">
-                <label>Email</label>
-                <input type="text" name="email">
-                <label>Phone</label>
-                <input type="text" name="phone">
+                <label>Name</label><input type="text" name="name">
+                <label>About</label><input type="text" name="about">
+                <label>Age</label><input type="text" name="age">
+                <label>Email</label><input type="text" name="email">
+                <label>Phone</label><input type="text" name="phone">
             </div>
 
             <div class="section">
@@ -222,6 +214,6 @@
             <a href="{% url 'about' %}">📞 About / Contact</a>
         </div>
     </div>
+
 </body>
 </html>
-
