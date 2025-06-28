@@ -1,210 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ name }} - Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>{{ name }} - Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
 
-    <style>
-        :root {
-            --light-bg: #ffffff;
-            --dark-bg: #121212;
-            --light-text: #222;
-            --dark-text: #f1f1f1;
-            --primary: #007b83;
-            --border: #e0e0e0;
-        }
+  <style>
+    :root {
+      --primary-color: #2e2e2e;
+      --accent-color: #0066cc;
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f5f5f5;
+      --border-light: #ddd;
+    }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 30px 15px;
-            background-color: var(--light-bg);
-            color: var(--light-text);
-            transition: all 0.3s ease;
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
 
-        body[data-theme="dark"] {
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-        }
+    body[data-theme='dark'] {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-        .resume-container {
-            max-width: 850px;
-            margin: auto;
-            padding: 30px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
+    .resume-container {
+      width: 794px;
+      margin: auto;
+      padding: 30px 40px;
+      background-color: var(--bg-light);
+      color: inherit;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
 
-        body[data-theme="dark"] .resume-container {
-            background-color: #1e1e1e;
-            border-color: #333;
-        }
+    body[data-theme='dark'] .resume-container {
+      background-color: #1e1e1e;
+      border-color: #444;
+    }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 5px;
-            color: var(--primary);
-        }
+    h1 {
+      font-size: 30px;
+      color: var(--accent-color);
+      margin-bottom: 5px;
+    }
 
-        h2.section-title {
-            font-size: 20px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
-            margin-top: 30px;
-            color: var(--primary);
-        }
+    h3 {
+      font-weight: 400;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
 
-        h3 {
-            margin-top: 5px;
-            color: inherit;
-            font-weight: normal;
-        }
+    .info p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
 
-        p, li {
-            font-size: 15px;
-            line-height: 1.6;
-        }
+    h2.section-title {
+      font-size: 18px;
+      border-bottom: 1px solid var(--border-light);
+      margin-top: 30px;
+      padding-bottom: 5px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
 
-        ul {
-            padding-left: 20px;
-        }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
 
-        .info {
-            margin: 20px 0;
-        }
+    li {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
 
-        .info p {
-            margin: 6px 0;
-        }
+    .score-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .tools {
-            text-align: center;
-            margin-top: 30px;
-        }
+    .score-box p {
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-        .btn {
-            background-color: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 5px;
-            margin: 0 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    .tools {
+      text-align: center;
+      margin-top: 30px;
+    }
 
-        .btn:hover {
-            background-color: #005f63;
-        }
+    .btn {
+  background: linear-gradient(135deg, #0400e6, #000000);
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
 
-        .score-box {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 195, 255, 0.5);
+}
 
-        .score-box p {
-            font-weight: bold;
-        }
-    </style>
+.btn:active {
+  transform: scale(0.96);
+}
+    @media print {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      body,
+      html {
+        background: white !important;
+        color: black !important;
+      }
+      .tools {
+        display: none;
+      }
+      .resume-container {
+        box-shadow: none;
+        border: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
 </head>
-
 <body data-theme="light">
+  <div class="score-box">
+    <h3>Resume Score: {{ resume_score }}/30</h3>
+    {% if resume_score >= 25 %}
+    <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
+    {% elif resume_score >= 15 %}
+    <p style="color: orange;">⚠️ Good, but can be improved.</p>
+    {% else %}
+    <p style="color: red;">❌ Needs significant improvement.</p>
+    {% endif %}
+  </div>
 
-    <div class="score-box">
-        <h3>Resume Score: {{ resume_score }}/30</h3>
-        {% if resume_score >= 25 %}
-            <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
-        {% elif resume_score >= 15 %}
-            <p style="color: orange;">⚠️ Good, but can be improved.</p>
-        {% else %}
-            <p style="color: red;">❌ Needs significant improvement.</p>
-        {% endif %}
+  <div class="resume-container" id="resume">
+    <h1>{{ name }}</h1>
+    {% if about %}<h3>{{ about }}</h3>{% endif %}
+
+    <div class="info">
+      {% if email %}<p><strong>Email:</strong> {{ email }}</p>{% endif %}
+      {% if phone %}<p><strong>Phone:</strong> {{ phone }}</p>{% endif %}
+      {% if age %}<p><strong>Age:</strong> {{ age }}</p>{% endif %}
+      {% if linkedin %}
+      <p><strong>LinkedIn:</strong> <a href="{{ linkedin }}" target="_blank">{{ linkedin }}</a></p>
+      {% endif %}
     </div>
 
-    <div class="resume-container" id="resume">
-        <h1>{{ name }}</h1>
-        <h3>{{ about }}</h3>
+    {% if skill1 or skill2 or skill3 or skill4 or skill5 %}
+    <h2 class="section-title">Skills</h2>
+    <ul>
+      {% if skill1 %}<li>{{ skill1 }}</li>{% endif %}
+      {% if skill2 %}<li>{{ skill2 }}</li>{% endif %}
+      {% if skill3 %}<li>{{ skill3 }}</li>{% endif %}
+      {% if skill4 %}<li>{{ skill4 }}</li>{% endif %}
+      {% if skill5 %}<li>{{ skill5 }}</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="info">
-            <p><strong>Email:</strong> {{ email }}</p>
-            <p><strong>Phone:</strong> {{ phone }}</p>
-            <p><strong>Age:</strong> {{ age }}</p>
-            <p><strong>Portfolio:</strong> <a href="#" style="color: var(--primary);">yourportfolio.com</a></p>
-            <p><strong>LinkedIn:</strong> <a href="#" style="color: var(--primary);">linkedin.com/in/yourname</a></p>
-        </div>
+    {% if degree1 or degree2 or degree3 %}
+    <h2 class="section-title">Education</h2>
+    <ul>
+      {% if degree1 %}<li>{{ degree1 }} – {{ college1 }} ({{ year1 }})</li>{% endif %}
+      {% if degree2 %}<li>{{ degree2 }} – {{ college2 }} ({{ year2 }})</li>{% endif %}
+      {% if degree3 %}<li>{{ degree3 }} – {{ college3 }} ({{ year3 }})</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <h2 class="section-title">Skills</h2>
-        <ul>
-            <li>{{ skill1 }}</li>
-            <li>{{ skill2 }}</li>
-            <li>{{ skill3 }}</li>
-            <li>{{ skill4 }}</li>
-            <li>{{ skill5 }}</li>
-        </ul>
+    {% if lang1 or lang2 or lang3 %}
+    <h2 class="section-title">Languages</h2>
+    <ul>
+      {% if lang1 %}<li>{{ lang1 }}</li>{% endif %}
+      {% if lang2 %}<li>{{ lang2 }}</li>{% endif %}
+      {% if lang3 %}<li>{{ lang3 }}</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <h2 class="section-title">Education</h2>
-        <ul>
-            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
-        </ul>
+    {% if project1 or project2 %}
+    <h2 class="section-title">Projects</h2>
+    <ul>
+      {% if project1 %}
+      <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br />{{ desc1 }}</li>
+      {% endif %}
+      {% if project2 %}
+      <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br />{{ desc2 }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
 
-        <h2 class="section-title">Languages</h2>
-        <ul>
-            <li>{{ lang1 }}</li>
-            <li>{{ lang2 }}</li>
-            <li>{{ lang3 }}</li>
-        </ul>
+    {% if company1 or company2 %}
+    <h2 class="section-title">Experience</h2>
+    <ul>
+      {% if company1 %}
+      <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br />{{ lin11 }}</li>
+      {% endif %}
+      {% if company2 %}
+      <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br />{{ lin21 }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
 
-        <h2 class="section-title">Projects</h2>
-        <ul>
-            <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>
-            <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>
-        </ul>
+    {% if ach1 or ach2 or ach3 %}
+    <h2 class="section-title">Achievements</h2>
+    <ul>
+      {% if ach1 %}<li>{{ ach1 }}</li>{% endif %}
+      {% if ach2 %}<li>{{ ach2 }}</li>{% endif %}
+      {% if ach3 %}<li>{{ ach3 }}</li>{% endif %}
+    </ul>
+    {% endif %}
+  </div>
 
-        <h2 class="section-title">Experience</h2>
-        <ul>
-            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
-        </ul>
+  <div class="tools">
+    <button onclick="generatePDF('resume')" class="btn">📄 Download PDF</button>
+    <button onclick="toggleTheme()" class="btn">🌓 Toggle Theme</button>
+  </div>
 
-        <h2 class="section-title">Achievements</h2>
-        <ul>
-            <li>{{ ach1 }}</li>
-            <li>{{ ach2 }}</li>
-            <li>{{ ach3 }}</li>
-        </ul>
-    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF(containerId) {
+      const element = document.getElementById(containerId);
+      const opt = {
+        margin: 0,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: { scale: 5, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
 
-    <div class="tools">
-        <button onclick="generatePDF('resume')" class="btn">📄 Download PDF</button>
-        <button onclick="toggleTheme()" class="btn">🌓 Toggle Theme</button>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-    <script>
-        function generatePDF(containerId) {
-            const element = document.getElementById(containerId);
-            const opt = {
-                margin: 0,
-                filename: 'resume.pdf',
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 4, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const current = body.getAttribute("data-theme");
-            body.setAttribute("data-theme", current === "light" ? "dark" : "light");
-        }
-    </script>
-
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+  </script>
 </body>
 </html>

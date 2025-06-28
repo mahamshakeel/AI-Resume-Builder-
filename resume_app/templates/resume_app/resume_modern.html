@@ -1,271 +1,286 @@
 {% extends 'resume_app/base.html' %}
-
 {% block content %}
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
     :root {
-        --light-bg: linear-gradient(135deg, #ffffff, #e0f7fa);
-        --dark-bg: linear-gradient(135deg, #121212, #2c2c2c);
-        --glass-bg-light: rgba(255, 255, 255, 0.6);
-        --glass-bg-dark: rgba(40, 40, 40, 0.6);
-        --primary: #2a9d8f;
+        --bg-light: #f4f6fc;
+        --bg-dark: #121212;
+        --primary: #007bff;
         --text-light: #333;
         --text-dark: #eee;
+        --sidebar-bg: #0d1b2a;
         --font-main: 'Inter', sans-serif;
     }
 
     body {
+        background: var(--bg-light);
         font-family: var(--font-main);
-        background: var(--light-bg);
-        background-size: 200% 200%;
-        animation: gradientFlow 12s ease infinite;
-        transition: background 0.4s ease;
-    }
-
-    body[data-theme="dark"] .left-column {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        /* deeper blue for dark mode */
-    }
-
-    @keyframes gradientFlow {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: 50px auto;
-        padding: 40px;
-        border-radius: 20px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 30px;
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(20px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        margin: 0;
+        padding: 20px;
+        transition: 0.3s ease all;
         color: var(--text-light);
     }
 
-    body[data-theme="dark"] .container {
-        background: var(--glass-bg-dark);
+    body[data-theme="dark"] {
+        background: var(--bg-dark);
         color: var(--text-dark);
     }
 
-    .left-column {
-        flex: 1;
-        background: linear-gradient(135deg, #3a7bd5, #3a6073);
-        /* modern bluish gradient */
-        color: white;
-        padding: 25px;
+    .resume-wrapper {
+        max-width: 900px;
+        margin: auto;
+        display: flex;
         border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        /* subtle shadow */
-        transition: background 0.3s ease, box-shadow 0.3s ease;
-        color: #fff !important;
-
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(12, 0, 249, 0.1);
     }
 
-    .left-column h2,.left-column h3 {
-        color: #fff !important;
-    }
-    .right-column h2,.right-column h3{
-        color: var(--primary) !important;
-
-    }
-    
-    h2 {
-        font-size: 28px;
-        color: var(--primary);
-    }
-
-    h3 {
-        margin-top: 15px;
-        font-size: 20px;
-        color: var(--primary);
-        border-bottom: 2px solid var(--primary);
-        display: inline-block;
-        padding-bottom: 4px;
-    }
-
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-    }
-
-    li {
-        margin-bottom: 6px;
-    }
-
-    .resume-score {
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .resume-score h2 {
-        font-size: 24px;
-    }
-
-    .btn {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 10px 20px;
-        background: var(--primary);
+    .left {
+        background: var(--sidebar-bg);
         color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
+        width: 30%;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
-    .btn:hover {
-        background: #22786e; 
+    .left h2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+        text-align: center;
+        color: #007bff;
+    }
+
+    .left p {
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .skills, .languages, .contact {
+        margin-top: 25px;
     }
 
     .skill-tag {
         display: inline-block;
-        background: var(--primary);
+        background: rgba(255, 255, 255, 0.15);
         color: white;
-        padding: 6px 12px;
-        border-radius: 30px;
-        margin: 4px 6px 0 0;
-        font-size: 14px;
+        padding: 5px 12px;
+        margin: 4px;
+        border-radius: 20px;
+        font-size: 13px;
     }
 
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease-out forwards;
+    .right {
+        background: white;
+        padding: 30px;
+        width: 70%;
     }
 
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    body[data-theme="dark"] .right {
+        background: #2c2c2c;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 0;
+    }
+
+    h3 {
+        font-size: 18px;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .section {
+        margin-bottom: 25px;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+
+    .score-box {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .btn-area {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .btn {
+        background: linear-gradient(135deg, #0400ff, #000000);
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 195, 255, 0.5);
+    }
+
+    .btn:active {
+        transform: scale(0.96);
     }
 
     @media screen and (max-width: 768px) {
-        .container {
-            grid-template-columns: 1fr;
+        .resume-wrapper {
+            flex-direction: column;
+        }
+
+        .left, .right {
+            width: 100%;
+        }
+
+        .right {
+            padding: 20px;
+        }
+    }
+
+    @media print {
+        .btn-area {
+            display: none;
+        }
+        body, html {
+            background: white !important;
+            color: black !important;
         }
     }
 </style>
 
-<!-- Resume Score -->
-<div class="resume-score fade-in">
-    <h2>Resume Score: {{ resume_score }}/30</h2>
+<!-- Score Block -->
+<div class="score-box">
+    <h3>Resume Score: {{ resume_score }}/30</h3>
     {% if resume_score >= 25 %}
-    <p style="color: green;">Great! Your resume is highly optimized.</p>
+        <p style="color: green;">✅ Excellent!</p>
     {% elif resume_score >= 15 %}
-    <p style="color: orange;">Good. Consider improving keyword use and formatting.</p>
+        <p style="color: orange;">⚠️ Needs improvement</p>
     {% else %}
-    <p style="color: red;">Needs work. Add more relevant content and check formatting.</p>
+        <p style="color: red;">❌ Needs work</p>
     {% endif %}
 </div>
 
-<!-- Resume Container -->
-<div class="container fade-in" id="resume">
-    <!-- Left Column -->
-    <div class="left-column">
-        <div>
-            <h2>{{ name }}</h2>
-            <p>{{ about }}</p>
+<!-- Resume Layout -->
+<div class="resume-wrapper" id="resume">
+    <div class="left">
+        <h2>{{ name }}</h2>
+        {% if about %}<p>{{ about }}</p>{% endif %}
+
+        <div class="contact">
+            {% if email %}<p><strong>Email:</strong> {{ email }}</p>{% endif %}
+            {% if phone %}<p><strong>Phone:</strong> {{ phone }}</p>{% endif %}
+            {% if age %}<p><strong>Age:</strong> {{ age }}</p>{% endif %}
         </div>
-        <div>
-            <strong>Email:</strong><br>{{ email }}<br>
-            <strong>Phone:</strong><br>{{ phone }}<br>
-            <strong>Age:</strong><br>{{ age }}
-        </div>
-        <div>
+
+        {% if skill1 or skill2 or skill3 or skill4 or skill5 %}
+        <div class="skills">
             <h3>Skills</h3>
-            <div>
-                <span class="skill-tag">{{ skill1 }}</span>
-                <span class="skill-tag">{{ skill2 }}</span>
-                <span class="skill-tag">{{ skill3 }}</span>
-                <span class="skill-tag">{{ skill4 }}</span>
-                <span class="skill-tag">{{ skill5 }}</span>
-            </div>
+            {% if skill1 %}<span class="skill-tag">{{ skill1 }}</span>{% endif %}
+            {% if skill2 %}<span class="skill-tag">{{ skill2 }}</span>{% endif %}
+            {% if skill3 %}<span class="skill-tag">{{ skill3 }}</span>{% endif %}
+            {% if skill4 %}<span class="skill-tag">{{ skill4 }}</span>{% endif %}
+            {% if skill5 %}<span class="skill-tag">{{ skill5 }}</span>{% endif %}
         </div>
-        <div>
+        {% endif %}
+
+        {% if lang1 or lang2 or lang3 %}
+        <div class="languages">
             <h3>Languages</h3>
             <ul>
-                <li>{{ lang1 }}</li>
-                <li>{{ lang2 }}</li>
-                <li>{{ lang3 }}</li>
+                {% if lang1 %}<li>{{ lang1 }}</li>{% endif %}
+                {% if lang2 %}<li>{{ lang2 }}</li>{% endif %}
+                {% if lang3 %}<li>{{ lang3 }}</li>{% endif %}
             </ul>
         </div>
+        {% endif %}
     </div>
 
-    <!-- Right Column -->
-    <div class="right-column">
-        <div>
+    <div class="right">
+        {% if degree1 or degree2 or degree3 %}
+        <div class="section">
             <h3>Education</h3>
             <ul>
-                <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-                <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-                <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+                {% if degree1 %}<li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>{% endif %}
+                {% if degree2 %}<li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>{% endif %}
+                {% if degree3 %}<li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>{% endif %}
             </ul>
         </div>
-        <div>
+        {% endif %}
+
+        {% if project1 or project2 %}
+        <div class="section">
             <h3>Projects</h3>
             <ul>
-                <li><strong>{{ project1 }}</strong> ({{ durat1 }})<br>{{ desc1 }}</li>
-                <li><strong>{{ project2 }}</strong> ({{ durat2 }})<br>{{ desc2 }}</li>
+                {% if project1 %}<li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>{% endif %}
+                {% if project2 %}<li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>{% endif %}
             </ul>
         </div>
-        <div>
+        {% endif %}
+
+        {% if company1 or company2 %}
+        <div class="section">
             <h3>Experience</h3>
             <ul>
-                <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-                <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+                {% if company1 %}<li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>{% endif %}
+                {% if company2 %}<li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>{% endif %}
             </ul>
         </div>
-        <div>
+        {% endif %}
+
+        {% if ach1 or ach2 or ach3 %}
+        <div class="section">
             <h3>Achievements</h3>
             <ul>
-                <li>{{ ach1 }}</li>
-                <li>{{ ach2 }}</li>
-                <li>{{ ach3 }}</li>
+                {% if ach1 %}<li>{{ ach1 }}</li>{% endif %}
+                {% if ach2 %}<li>{{ ach2 }}</li>{% endif %}
+                {% if ach3 %}<li>{{ ach3 }}</li>{% endif %}
             </ul>
         </div>
-        <button class="btn" onclick="generatePDF('resume')">Download PDF</button>
+        {% endif %}
     </div>
 </div>
 
-<!-- Scripts -->
+<!-- Buttons -->
+<div class="btn-area">
+    <button class="btn" onclick="generatePDF('resume')">📄 Download PDF</button>
+    <button class="btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
     function generatePDF(containerId) {
         const element = document.getElementById(containerId);
-        const clone = element.cloneNode(true);
-        clone.style.width = '794px';
-        clone.style.padding = '20px';
-
         const opt = {
             margin: 0,
-            filename: 'resume.pdf',
+            filename: '{{ name|default:"resume" }}_modern.pdf',
             image: { type: 'jpeg', quality: 1.0 },
-            html2canvas: { scale: 4, useCORS: true },
+            html2canvas: { scale: 5, useCORS: true },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
-        html2pdf().set(opt).from(clone).save();
+        html2pdf().set(opt).from(element).save();
     }
 
     function toggleTheme() {
         const body = document.body;
-        const theme = body.getAttribute("data-theme");
-        body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+        const current = body.getAttribute("data-theme");
+        body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
     }
 </script>
 {% endblock %}
