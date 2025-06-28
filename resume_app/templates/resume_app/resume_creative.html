@@ -1,173 +1,267 @@
 {% extends 'resume_app/base.html' %}
-
 {% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
-    :root {
-        --light-bg: linear-gradient(135deg, #f3ec78, #af4261, #00c9ff, #92fe9d);
-        --dark-bg: linear-gradient(135deg, #000000, #e37676, #2d2c2c, #000000);
-    }
-
     body {
-        background: var(--light-bg);
-        background-size: 600% 600%;
-        animation: moveBg 18s ease infinite;
-        font-family: 'Segoe UI', sans-serif;
-        transition: background 0.5s;
+        font-family: 'Quicksand', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #fdfbfb, #ebedee);
+        transition: background 0.5s ease;
     }
 
-    [data-theme="dark"] body {
-        background: var(--dark-bg);
+    body[data-theme="dark"] {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: #eee;
     }
 
-    @keyframes moveBg {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    .creative-wrapper {
+        max-width: 1000px;
+        margin: 30px auto;
+        display: flex;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     }
 
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 30px 40px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 2px solid rgba(255, 255, 255, 0.2);
+    .left-bar {
+        background: linear-gradient(135deg, #ff6b6b, #f06595);
         color: #fff;
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
-        animation: fadeInUp 0.8s ease-out forwards;
+        width: 35%;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    h1 {
-        font-size: 36px;
-        color: #ffb347;
+    .left-bar h1 {
+        font-size: 28px;
         margin-bottom: 5px;
     }
 
-    h4 {
-        color: #f2f2f2;
-        margin-top: 0;
-        font-weight: normal;
+    .left-bar p {
+        font-size: 14px;
+        line-height: 1.5;
     }
 
-    h2 {
+    .contact-info, .skills, .languages {
+        margin-top: 25px;
+    }
+
+    .skills span, .languages span {
+        display: inline-block;
+        background: rgba(255,255,255,0.2);
+        padding: 6px 12px;
+        margin: 4px 4px 4px 0;
+        border-radius: 18px;
+        font-size: 13px;
+    }
+
+    .right-content {
+        background: #fff;
+        padding: 40px 35px;
+        width: 65%;
+    }
+
+    body[data-theme="dark"] .right-content {
+        background: #1c1c1c;
+    }
+
+    .right-content h2 {
+        color: #f06595;
         margin-top: 30px;
-        color: #ffeaa7;
+        font-size: 20px;
     }
 
     ul {
-        padding-left: 20px;
-        margin: 0;
+        padding-left: 18px;
     }
 
-    ul li {
-        line-height: 1.6;
+    li {
+        margin-bottom: 8px;
         font-size: 15px;
     }
 
-    hr {
-        border: 1px dashed rgba(255, 255, 255, 0.2);
+    .section {
+        margin-bottom: 30px;
     }
 
-    .score-section {
+    .score-box {
         text-align: center;
-        margin-top: 30px;
-        color: black;
+        margin-top: 20px;
     }
 
-    .score-section p {
+    .score-box p {
         font-weight: bold;
+    }
+
+    .btn-area {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .btn {
+        background: linear-gradient(135deg, #ff6b6b, #f06595);
+        color: #fff;
+        padding: 12px 26px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 5px 15px rgba(240, 101, 149, 0.4);
+        margin: 0 8px;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 105, 135, 0.5);
+    }
+
+    .btn:active {
+        transform: scale(0.96);
+    }
+
+    @media print {
+        .btn-area {
+            display: none;
+        }
+
+        body, html {
+            background: white !important;
+            color: black !important;
+        }
+
+        .right-content {
+            background: white !important;
+        }
+
+        .left-bar {
+            background: #000 !important;
+            color: white !important;
+        }
     }
 </style>
 
-<!-- Resume Score Display -->
-<div class="score-section fade-in">
-    <h2>Resume Score: {{ resume_score }}/30</h2>
+<!-- Resume Score -->
+<div class="score-box">
+    <h3>Resume Score: {{ resume_score }}/30</h3>
     {% if resume_score >= 25 %}
-        <p>🎉 Excellent! Your resume is well optimized.</p>
+        <p style="color: green;">✅ Excellent! Highly optimized.</p>
     {% elif resume_score >= 15 %}
-        <p>⚠️ Good, but it can be improved!</p>
+        <p style="color: orange;">⚠️ Good. Could be better.</p>
     {% else %}
-        <p>❌ Needs improvement. Add more relevant content.</p>
+        <p style="color: red;">❌ Needs improvement.</p>
     {% endif %}
 </div>
 
-<!-- Resume Body -->
-<div class="container fade-in" id="resume">
-    <h1>{{ name }}</h1>
-    <h4>{{ about }}</h4>
+<!-- Resume Content -->
+<div class="creative-wrapper" id="resume">
+    <div class="left-bar">
+        <div>
+            <h1>{{ name }}</h1>
+            {% if about %}<p>{{ about }}</p>{% endif %}
+        </div>
 
-    <div>
-        <strong>Email:</strong> {{ email }}<br>
-        <strong>Phone:</strong> {{ phone }}<br>
-        <strong>Age:</strong> {{ age }}
+        <div class="contact-info">
+            {% if email %}<p><strong>Email:</strong> {{ email }}</p>{% endif %}
+            {% if phone %}<p><strong>Phone:</strong> {{ phone }}</p>{% endif %}
+            {% if age %}<p><strong>Age:</strong> {{ age }}</p>{% endif %}
+        </div>
+
+        {% if skill1 or skill2 or skill3 or skill4 or skill5 %}
+        <div class="skills">
+            <h4>Skills</h4>
+            {% if skill1 %}<span>{{ skill1 }}</span>{% endif %}
+            {% if skill2 %}<span>{{ skill2 }}</span>{% endif %}
+            {% if skill3 %}<span>{{ skill3 }}</span>{% endif %}
+            {% if skill4 %}<span>{{ skill4 }}</span>{% endif %}
+            {% if skill5 %}<span>{{ skill5 }}</span>{% endif %}
+        </div>
+        {% endif %}
+
+        {% if lang1 or lang2 or lang3 %}
+        <div class="languages">
+            <h4>Languages</h4>
+            {% if lang1 %}<span>{{ lang1 }}</span>{% endif %}
+            {% if lang2 %}<span>{{ lang2 }}</span>{% endif %}
+            {% if lang3 %}<span>{{ lang3 }}</span>{% endif %}
+        </div>
+        {% endif %}
     </div>
 
-    <hr>
+    <div class="right-content">
+        {% if degree1 or degree2 or degree3 %}
+        <div class="section">
+            <h2>🎓 Education</h2>
+            <ul>
+                {% if degree1 %}<li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>{% endif %}
+                {% if degree2 %}<li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>{% endif %}
+                {% if degree3 %}<li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>{% endif %}
+            </ul>
+        </div>
+        {% endif %}
 
-    <h2>💼 Skills</h2>
-    <ul>
-        <li>{{ skill1 }}</li><li>{{ skill2 }}</li><li>{{ skill3 }}</li><li>{{ skill4 }}</li><li>{{ skill5 }}</li>
-    </ul>
+        {% if project1 or project2 %}
+        <div class="section">
+            <h2>🚀 Projects</h2>
+            <ul>
+                {% if project1 %}<li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>{% endif %}
+                {% if project2 %}<li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>{% endif %}
+            </ul>
+        </div>
+        {% endif %}
 
-    <h2>🎓 Education</h2>
-    <ul>
-        <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-        <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-        <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
-    </ul>
+        {% if company1 or company2 %}
+        <div class="section">
+            <h2>💼 Experience</h2>
+            <ul>
+                {% if company1 %}<li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>{% endif %}
+                {% if company2 %}<li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>{% endif %}
+            </ul>
+        </div>
+        {% endif %}
 
-    <h2>🚀 Projects</h2>
-    <ul>
-        <li><strong>{{ project1 }}</strong> - {{ durat1 }}<br>{{ desc1 }}</li>
-        <li><strong>{{ project2 }}</strong> - {{ durat2 }}<br>{{ desc2 }}</li>
-    </ul>
-
-    <h2>🧳 Experience</h2>
-    <ul>
-        <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-        <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
-    </ul>
-
-    <h2>🏆 Achievements</h2>
-    <ul>
-        <li>{{ ach1 }}</li><li>{{ ach2 }}</li><li>{{ ach3 }}</li>
-    </ul>
+        {% if ach1 or ach2 or ach3 %}
+        <div class="section">
+            <h2>🏆 Achievements</h2>
+            <ul>
+                {% if ach1 %}<li>{{ ach1 }}</li>{% endif %}
+                {% if ach2 %}<li>{{ ach2 }}</li>{% endif %}
+                {% if ach3 %}<li>{{ ach3 }}</li>{% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
 </div>
 
-<!-- PDF Script -->
+<!-- Buttons -->
+<div class="btn-area">
+    <button class="btn" onclick="generatePDF('resume')">📄 Download PDF</button>
+    <button class="btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
+</div>
+
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
     function generatePDF(containerId) {
         const element = document.getElementById(containerId);
-
         const opt = {
             margin: 0,
-            filename: 'resume.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 3, useCORS: true },
-            jsPDF: {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait'
-            }
+            filename: '{{ name|default:"creative_resume" }}.pdf',
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: { scale: 5, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
         html2pdf().set(opt).from(element).save();
+    }
+
+    function toggleTheme() {
+        const body = document.body;
+        const theme = body.getAttribute("data-theme");
+        body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
     }
 </script>
 {% endblock %}

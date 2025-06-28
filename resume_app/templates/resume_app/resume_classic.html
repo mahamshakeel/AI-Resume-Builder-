@@ -1,260 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ name }} - Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>{{ name }} - Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2e2e2e;
+      --accent-color: #0066cc;
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f5f5f5;
+      --border-light: #ddd;
+    }
 
-    <style>
-        :root {
-            --bg-light: linear-gradient(-45deg, #5aff96, #e5ff73, #4cfffc, #ff2ac3);
-            --bg-dark: linear-gradient(-45deg, #1f1f1f, #9d9d9d, #cb8181, #303030);
-            --text-light: #333;
-            --text-dark: #eee;
-            --card-bg-light: rgba(255, 255, 255, 0.15);
-            --card-bg-dark: rgba(0, 0, 0, 0.4);
-            --highlight: #00c896;
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            transition: all 0.4s ease;
-            background: var(--bg-light);
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
-        }
+    body[data-theme='dark'] {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-        body[data-theme="dark"] {
-            background: var(--bg-dark);
-        }
+    .resume-container {
+      width: 794px;
+      margin: auto;
+      padding: 30px 40px;
+      background-color: var(--bg-light);
+      color: inherit;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    body[data-theme='dark'] .resume-container {
+      background-color: #1e1e1e;
+      border-color: #444;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            background: var(--card-bg-light);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+    h1 {
+      font-size: 30px;
+      color: var(--accent-color);
+      margin-bottom: 5px;
+    }
 
-        body[data-theme="dark"] .container {
-            background: var(--card-bg-dark);
-            color: var(--text-dark);
-        }
+    h3 {
+      font-weight: 400;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
 
-        h1, h2 {
-            margin-bottom: 8px;
-            color: var(--highlight);
-        }
+    .info p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
 
-        h3 {
-            margin-top: 0;
-            color: #000000;
-        }
+    h2.section-title {
+      font-size: 18px;
+      border-bottom: 1px solid var(--border-light);
+      margin-top: 30px;
+      padding-bottom: 5px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
 
-        p, li {
-            font-size: 15px;
-            line-height: 1.6;
-        }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
 
-        ul {
-            padding-left: 20px;
-        }
+    li {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
 
-        .section {
-            margin-top: 35px;
-        }
+    .score-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .section-title {
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
+    .score-box p {
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-        .tools {
-            text-align: center;
-            margin-top: 30px;
-        }
+    .tools {
+      text-align: center;
+      margin-top: 30px;
+    }
 
-        .btn-download, .btn-theme {
-            background: var(--highlight);
-            color: white;
-            padding: 10px 22px;
-            border: none;
-            border-radius: 8px;
-            margin: 10px 8px;
-            cursor: pointer;
-            font-size: 15px;
-        }
+    .btn {
+  background: linear-gradient(135deg, #0400e6, #000000);
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
 
-        .btn-download:hover, .btn-theme:hover {
-            background: #009e7e;
-        }
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 195, 255, 0.5);
+}
 
-        .links a {
-            color: var(--highlight);
-            text-decoration: none;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .container {
-                padding: 25px;
-            }
-        }
-    </style>
+.btn:active {
+  transform: scale(0.96);
+}
+    @media print {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      body,
+      html {
+        background: white !important;
+        color: black !important;
+      }
+      .tools {
+        display: none;
+      }
+      .resume-container {
+        box-shadow: none;
+        border: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
 </head>
-
 <body data-theme="light">
-    
-    <div style="text-align: center; margin-top: 25px;">
-        <h3>Resume Score: {{ resume_score }}/30</h3>
-        {% if resume_score >= 25 %}
-            <p style="color: #0f9d58;">✅ Excellent! Your resume is highly optimized.</p>
-        {% elif resume_score >= 15 %}
-            <p style="color: #f4b400;">⚠️ Good, but can be improved.</p>
-        {% else %}
-            <p style="color: #db4437;">❌ Needs significant improvement.</p>
-        {% endif %}
+  <div class="score-box">
+    <h3>Resume Score: {{ resume_score }}/30</h3>
+    {% if resume_score >= 25 %}
+    <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
+    {% elif resume_score >= 15 %}
+    <p style="color: orange;">⚠️ Good, but can be improved.</p>
+    {% else %}
+    <p style="color: red;">❌ Needs significant improvement.</p>
+    {% endif %}
+  </div>
+
+  <div class="resume-container" id="resume">
+    <h1>{{ name }}</h1>
+    {% if about %}<h3>{{ about }}</h3>{% endif %}
+
+    <div class="info">
+      {% if email %}<p><strong>Email:</strong> {{ email }}</p>{% endif %}
+      {% if phone %}<p><strong>Phone:</strong> {{ phone }}</p>{% endif %}
+      {% if age %}<p><strong>Age:</strong> {{ age }}</p>{% endif %}
+      {% if linkedin %}
+      <p><strong>LinkedIn:</strong> <a href="{{ linkedin }}" target="_blank">{{ linkedin }}</a></p>
+      {% endif %}
     </div>
 
-    <div class="container" id="resume">
-        <h1>{{ name }}</h1>
-        <h3>{{ about }}</h3>
+    {% if skill1 or skill2 or skill3 or skill4 or skill5 %}
+    <h2 class="section-title">Skills</h2>
+    <ul>
+      {% if skill1 %}<li>{{ skill1 }}</li>{% endif %}
+      {% if skill2 %}<li>{{ skill2 }}</li>{% endif %}
+      {% if skill3 %}<li>{{ skill3 }}</li>{% endif %}
+      {% if skill4 %}<li>{{ skill4 }}</li>{% endif %}
+      {% if skill5 %}<li>{{ skill5 }}</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="section">
-            <p><strong>Email:</strong> {{ email }}</p>
-            <p><strong>Phone:</strong> {{ phone }}</p>
-            <p><strong>Age:</strong> {{ age }}</p>
-            <div class="links">
-                <p><strong>Portfolio:</strong> <a href="#">yourportfolio.com</a></p>
-                <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/yourname</a></p>
-            </div>
-        </div>
+    {% if degree1 or degree2 or degree3 %}
+    <h2 class="section-title">Education</h2>
+    <ul>
+      {% if degree1 %}<li>{{ degree1 }} – {{ college1 }} ({{ year1 }})</li>{% endif %}
+      {% if degree2 %}<li>{{ degree2 }} – {{ college2 }} ({{ year2 }})</li>{% endif %}
+      {% if degree3 %}<li>{{ degree3 }} – {{ college3 }} ({{ year3 }})</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="section">
-            <h2 class="section-title">Skills</h2>
-            <ul>
-                <li>{{ skill1 }}</li>
-                <li>{{ skill2 }}</li>
-                <li>{{ skill3 }}</li>
-                <li>{{ skill4 }}</li>
-                <li>{{ skill5 }}</li>
-            </ul>
-        </div>
+    {% if lang1 or lang2 or lang3 %}
+    <h2 class="section-title">Languages</h2>
+    <ul>
+      {% if lang1 %}<li>{{ lang1 }}</li>{% endif %}
+      {% if lang2 %}<li>{{ lang2 }}</li>{% endif %}
+      {% if lang3 %}<li>{{ lang3 }}</li>{% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="section">
-            <h2 class="section-title">Education</h2>
-            <ul>
-                <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-                <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-                <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
-            </ul>
-        </div>
+    {% if project1 or project2 %}
+    <h2 class="section-title">Projects</h2>
+    <ul>
+      {% if project1 %}
+      <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br />{{ desc1 }}</li>
+      {% endif %}
+      {% if project2 %}
+      <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br />{{ desc2 }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="section">
-            <h2 class="section-title">Languages</h2>
-            <ul>
-                <li>{{ lang1 }}</li>
-                <li>{{ lang2 }}</li>
-                <li>{{ lang3 }}</li>
-            </ul>
-        </div>
+    {% if company1 or company2 %}
+    <h2 class="section-title">Experience</h2>
+    <ul>
+      {% if company1 %}
+      <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br />{{ lin11 }}</li>
+      {% endif %}
+      {% if company2 %}
+      <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br />{{ lin21 }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
 
-        <div class="section">
-            <h2 class="section-title">Projects</h2>
-            <ul>
-                <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>
-                <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>
-            </ul>
-        </div>
+    {% if ach1 or ach2 or ach3 %}
+    <h2 class="section-title">Achievements</h2>
+    <ul>
+      {% if ach1 %}<li>{{ ach1 }}</li>{% endif %}
+      {% if ach2 %}<li>{{ ach2 }}</li>{% endif %}
+      {% if ach3 %}<li>{{ ach3 }}</li>{% endif %}
+    </ul>
+    {% endif %}
+  </div>
 
-        <div class="section">
-            <h2 class="section-title">Experience</h2>
-            <ul>
-                <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-                <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
-            </ul>
-        </div>
+  <div class="tools">
+    <button onclick="generatePDF('resume')" class="btn">📄 Download PDF</button>
+    <button onclick="toggleTheme()" class="btn">🌓 Toggle Theme</button>
+  </div>
 
-        <div class="section">
-            <h2 class="section-title">Achievements</h2>
-            <ul>
-                <li>{{ ach1 }}</li>
-                <li>{{ ach2 }}</li>
-                <li>{{ ach3 }}</li>
-            </ul>
-        </div>
-    </div>
-    <div class="tools">
-        <button onclick="generatePDF('resume')" class="btn-download">📄 Download PDF</button>
-        <button onclick="toggleTheme()" class="btn-theme">🌓 Toggle Theme</button>
-    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script>
+    function generatePDF(containerId) {
+      const element = document.getElementById(containerId);
+      const opt = {
+        margin: 0,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: { scale: 5, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-    <script>
-        function generatePDF(containerId) {
-            const element = document.getElementById(containerId);
-    
-            const opt = {
-                margin:       0,
-                filename:     'resume.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  {
-                    scale: 4,           // Higher scale = sharper PDF
-                    useCORS: true
-                },
-                jsPDF:        {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-    
-            html2pdf().set(opt).from(element).save();
-        }
-   
-        function toggleTheme() {
-            const body = document.body;
-            const current = body.getAttribute("data-theme");
-            body.setAttribute("data-theme", current === "light" ? "dark" : "light");
-        }
-    </script>
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+  </script>
 </body>
 </html>

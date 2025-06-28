@@ -1,0 +1,206 @@
+{% extends 'resume_app/base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --light-bg: linear-gradient(-45deg, #5aff96, #e5ff73, #4cfffc, #ff2ac3);
+        --dark-bg: linear-gradient(-45deg, #1f1f1f, #9d9d9d, #cb8181, #303030);
+        --glass-bg-light: rgba(255, 255, 255, 0.2);
+        --glass-bg-dark: rgba(20, 20, 20, 0.6);
+        --highlight: #2a9d8f;
+    }
+
+    body {
+        background: var(--light-bg);
+        background-size: 400% 400%;
+        animation: gradientFlow 15s ease infinite;
+        transition: background 0.3s ease;
+    }
+
+    body[data-theme="dark"] {
+        background: var(--dark-bg);
+    }
+
+    @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        border-radius: 20px;
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+    }
+
+    body[data-theme="dark"] .container {
+        background: var(--glass-bg-dark);
+        color: #eee;
+    }
+
+    .left-column {
+        flex: 1;
+        background: var(--highlight);
+        color: white;
+        padding: 25px;
+        border-radius: 12px;
+    }
+
+    .right-column {
+        flex: 2;
+        padding: 25px;
+    }
+
+    h2, h3 {
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    .tools {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        background: var(--highlight);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 8px;
+    }
+
+    .btn:hover {
+        background: #21867a;
+    }
+</style>
+
+<!-- Resume Score Section -->
+<div style="text-align: center; margin-top: 20px;">
+    <h2>Resume Score: {{ resume_score }}/30</h2>
+    {% if resume_score >= 25 %}
+        <p style="color: green;">Great! Your resume is highly optimized.</p>
+    {% elif resume_score >= 15 %}
+        <p style="color: orange;">Good. Consider improving keyword use and formatting.</p>
+    {% else %}
+        <p style="color: red;">Needs work. Add more relevant content and check formatting.</p>
+    {% endif %}
+</div>
+
+<!-- Resume Body -->
+<div class="container fade-in" id="resume">
+    <div class="left-column">
+        <h2>{{ name }}</h2>
+        <h4>{{ about }}</h4>
+        <p><strong>Email:</strong><br>{{ email }}</p>
+        <p><strong>Phone:</strong><br>{{ phone }}</p>
+        <p><strong>Age:</strong><br>{{ age }}</p>
+
+        <h3>Skills</h3>
+        <ul>
+            <li>{{ skill1 }}</li><li>{{ skill2 }}</li><li>{{ skill3 }}</li><li>{{ skill4 }}</li><li>{{ skill5 }}</li>
+        </ul>
+
+        <h3>Languages</h3>
+        <ul>
+            <li>{{ lang1 }}</li><li>{{ lang2 }}</li><li>{{ lang3 }}</li>
+        </ul>
+    </div>
+
+    <div class="right-column">
+        <h3>Education</h3>
+        <ul>
+            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
+            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
+            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+        </ul>
+
+        <h3>Projects</h3>
+        <ul>
+            <li><strong>{{ project1 }}</strong> - {{ durat1 }}<br>{{ desc1 }}</li>
+            <li><strong>{{ project2 }}</strong> - {{ durat2 }}<br>{{ desc2 }}</li>
+        </ul>
+
+        <h3>Experience</h3>
+        <ul>
+            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
+            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        </ul>
+
+        <h3>Achievements</h3>
+        <ul>
+            <li>{{ ach1 }}</li><li>{{ ach2 }}</li><li>{{ ach3 }}</li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+    function generatePDF(containerId) {
+        const element = document.getElementById(containerId);
+
+        // Clone the element to avoid styling shifts during PDF generation
+        const clone = element.cloneNode(true);
+        clone.style.width = '794px'; // Match A4 width in px
+        clone.style.padding = '20px';
+        clone.style.boxSizing = 'border-box';
+
+        const opt = {
+            margin:       0,
+            filename:     'resume.pdf',
+            image:        { type: 'jpeg', quality: 1.0 },
+            html2canvas:  {
+                scale: 5,           // Sharpest render
+                useCORS: true,
+                logging: true,
+                windowWidth: 1200   // Simulate full width rendering
+            },
+            jsPDF:        {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
+
+        html2pdf().set(opt).from(clone).save();
+    }
+
+    function toggleTheme() {
+        const body = document.body;
+        const theme = body.getAttribute("data-theme");
+        body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+    }
+</script>
+
+{% endblock %}
