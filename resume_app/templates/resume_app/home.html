@@ -4,15 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Resume Builder - Home</title>
+ a-newbranch
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ main
     <style>
         * {
             box-sizing: border-box;
         }
 
         body {
+ a-newbranch
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #cdcdcd;
         }
@@ -25,22 +30,88 @@
             position: fixed;
             width: 250px;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #183d3e, #3541e5);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: #ffffff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+ main
         }
 
         .sidebar h4 {
             text-align: center;
+ a-newbranch
             margin-bottom: 30px;
         }
         label{
             margin-bottom: 6px;
+
+            font-size: 3rem;
+            color: #00e6ac;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+ main
         }
 
         .sidebar a {
             display: block;
+ a-newbranch
             color: white;
             padding: 12px 20px;
             text-decoration: none;
             transition: 0.3s;
+
+            margin-top: 18px;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .inline-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+ main
         }
 
         .sidebar a:hover {
@@ -48,6 +119,7 @@
             border-left: 4px solid #fff;
         }
 
+ a-newbranch
         .main-content {
             margin-left: 270px;
             padding: 30px;
@@ -65,6 +137,27 @@
             border-bottom: 2px solid #ccc;
             padding-bottom: 10px;
             margin-bottom: 20px;
+
+        .section {
+            margin-top: 30px;
+        }
+
+        button {
+            background: #00e6ac;
+            color: #000;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 40px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #a6eede;
+main
         }
         button.btn-primary {
     background: linear-gradient(135deg, #0400e2, #29403c);
@@ -85,15 +178,33 @@ button.btn-primary:hover {
     transform: scale(1.05);
 }
 
+a-newbranch
 button.btn-primary:active {
     transform: scale(0.98);
 }
 
         
+
+        .about-link a {
+            color: #00e6ac;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .about-link a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: #00e6ac;
+            margin-top: 30px;
+        }
+ main
     </style>
 </head>
 
 <body>
+a-newbranch
     <div class="sidebar">
         <h4><i class="fas fa-user-circle me-2"></i>Smart CV</h4>
         <a href="#"><i class="fas fa-user me-2"></i> Personal Info</a>
@@ -146,6 +257,29 @@ button.btn-primary:active {
                         </select>
                     </div>
                 </div>
+=======
+
+    <h1>Resume Builder</h1>
+
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="template">Choose Template:</label>
+            <select name="template">
+                <option value="classic">Classic</option>
+                <option value="modern">Modern</option>
+                <option value="creative">Creative</option>
+            </select>
+
+            <div class="section">
+                <h2>Personal Information</h2>
+                <label>Name</label><input type="text" name="name">
+                <label>About</label><input type="text" name="about">
+                <label>Age</label><input type="text" name="age">
+                <label>Email</label><input type="text" name="email">
+                <label>Phone</label><input type="text" name="phone">
+main
             </div>
 
             <div class="form-section" id="education-section">
@@ -560,6 +694,16 @@ function addCertification() {
         }
     </script>
 
+ a-newbranch
 </body>
 
 </html>
+
+        <div class="about-link">
+            <a href="{% url 'about' %}">📞 About / Contact</a>
+        </div>
+    </div>
+
+</body>
+</html>
+ main
