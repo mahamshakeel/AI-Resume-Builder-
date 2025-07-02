@@ -110,51 +110,67 @@
 
 <!-- Resume Body -->
 <div class="container fade-in" id="resume">
-    <h1>{{ name }}</h1>
-    <h4>{{ about }}</h4>
+    {% if name %}<h1>{{ name }}</h1>{% endif %}
+    {% if about %}<h4>{{ about }}</h4>{% endif %}
 
     <div>
-        <strong>Email:</strong> {{ email }}<br>
-        <strong>Phone:</strong> {{ phone }}<br>
-        <strong>Age:</strong> {{ age }}
+        {% if email %}<strong>Email:</strong> {{ email }}<br>{% endif %}
+        {% if phone %}<strong>Phone:</strong> {{ phone }}<br>{% endif %}
+        {% if age %}<strong>Age:</strong> {{ age }}{% endif %}
     </div>
 
     <hr>
 
+    {% if skills %}
     <h2>💼 Skills</h2>
     <ul>
-        <li>{{ skill1 }}</li>
-        <li>{{ skill2 }}</li>
-        <li>{{ skill3 }}</li>
-        <li>{{ skill4 }}</li>
-        <li>{{ skill5 }}</li>
+        {% for skill in skills %}
+            {% if skill %}<li>{{ skill }}</li>{% endif %}
+        {% endfor %}
     </ul>
+    {% endif %}
 
+    {% if education %}
     <h2>🎓 Education</h2>
     <ul>
-        <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-        <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-        <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+        {% for degree, college, year in education %}
+            {% if degree or college or year %}
+                <li>{{ degree }} - {{ college }} ({{ year }})</li>
+            {% endif %}
+        {% endfor %}
     </ul>
+    {% endif %}
 
+    {% if projects %}
     <h2>🚀 Projects</h2>
     <ul>
-        <li><strong>{{ project1 }}</strong> - {{ durat1 }}<br>{{ desc1 }}</li>
-        <li><strong>{{ project2 }}</strong> - {{ durat2 }}<br>{{ desc2 }}</li>
+        {% for proj, dur, desc in projects %}
+            {% if proj or dur or desc %}
+                <li><strong>{{ proj }}</strong> - {{ dur }}<br>{{ desc }}</li>
+            {% endif %}
+        {% endfor %}
     </ul>
+    {% endif %}
 
+    {% if experience %}
     <h2>🧳 Experience</h2>
     <ul>
-        <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-        <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+        {% for comp, post, dur, desc in experience %}
+            {% if comp or post or dur or desc %}
+                <li><strong>{{ comp }}</strong> – {{ post }} ({{ dur }})<br>{{ desc }}</li>
+            {% endif %}
+        {% endfor %}
     </ul>
+    {% endif %}
 
+    {% if achievements %}
     <h2>🏆 Achievements</h2>
     <ul>
-        <li>{{ ach1 }}</li>
-        <li>{{ ach2 }}</li>
-        <li>{{ ach3 }}</li>
+        {% for ach in achievements %}
+            {% if ach %}<li>{{ ach }}</li>{% endif %}
+        {% endfor %}
     </ul>
+    {% endif %}
 </div>
 
 <!-- PDF Script -->
@@ -162,19 +178,13 @@
 <script>
     function generatePDF(containerId) {
         const element = document.getElementById(containerId);
-
         const opt = {
             margin: 0,
             filename: 'resume.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 3, useCORS: true },
-            jsPDF: {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait'
-            }
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
         html2pdf().set(opt).from(element).save();
     }
 </script>

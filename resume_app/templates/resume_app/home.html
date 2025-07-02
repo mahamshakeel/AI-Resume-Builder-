@@ -14,11 +14,12 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
+            background-color: #dadada;
         }
 
-        .sidebar { 
-            height: 100vh; 
+
+        .sidebar {
+            height: 100vh;
             background: linear-gradient(180deg, #3c3b6e, #1e1e2f);
             color: white;
             padding-top: 20px;
@@ -66,6 +67,39 @@
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+
+    button.btn-primary {
+    background: linear-gradient(135deg, #0000ff, #000000);
+    color: #d8d8d8;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 200, 150, 0.3);
+}
+
+button.btn-primary:hover {
+    background: linear-gradient(135deg, #00fbff, #0000be);
+    box-shadow: 0 8px 28px rgba(0, 213, 241, 0.5);
+    transform: scale(1.05);
+}
+
+button.btn-primary:active {
+    transform: scale(0.98);
+}
+
+button.btn-primary:hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 10px;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: 0 0 20px rgba(0, 13, 255, 0.4);
+    z-index: -1;
+}
+
     </style>
 </head>
 
@@ -74,7 +108,6 @@
         <h4><i class="fas fa-user-circle me-2"></i>Smart CV</h4>
         <a href="#"><i class="fas fa-user me-2"></i> Personal Info</a>
         <a href="#"><i class="fas fa-bullseye me-2"></i> Skills</a>
-        <a href="#"><i class="fas fa-lightbulb me-2"></i> Skills</a>
         <a href="#"><i class="fas fa-graduation-cap me-2"></i> Education</a>
         <a href="#"><i class="fas fa-briefcase me-2"></i> Experience</a>
         <a href="#"><i class="fas fa-tasks me-2"></i> Projects</a>
@@ -127,441 +160,154 @@
 
 
 
+<div class="form-section" id="education-section">
+    <h5>Education</h5>
+    <div id="education-container">
+        <div class="row g-3">
+            <div class="col-md-4"><label>Degree</label><input type="text" class="form-control" name="degree[]" /></div>
+            <div class="col-md-4"><label>College</label><input type="text" class="form-control" name="college[]" /></div>
+            <div class="col-md-4"><label>Year</label><input type="text" class="form-control" name="year[]" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addEducation()">+ Add More </button>
+</div>
 
-            <div class="form-section">
-                <h5>Education: Tell us about your education</h5>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="degree1">Degree 1</label>
-                        <input type="text" class="form-control" name="degree1" id="degree1"
-                            placeholder="Enter your degree" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="college1">College 1</label>
-                        <input type="text" class="form-control" name="college1" id="college1"
-                            placeholder="Enter your college" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="year1">Year 1</label>
-                        <input type="text" class="form-control" name="year1" id="year1" placeholder="Enter your year" />
-                    </div>
+            <div class="form-section" id="experience-section">
+    <h5>Experience</h5>
+    <div id="experience-container">
+        <div class="row g-3">
+            <div class="col-md-4"><label>Company</label><input type="text" class="form-control" name="company[]" /></div>
+            <div class="col-md-4"><label>Post</label><input type="text" class="form-control" name="post[]" /></div>
+            <div class="col-md-4"><label>Duration</label><input type="text" class="form-control" name="duration[]" /></div>
+            <div class="col-md-12"><label>Description</label><input type="text" class="form-control" name="expdesc[]" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addExperience()">+ Add More </button>
+</div>
 
-                    <div class="col-md-6">
-                        <label for="degree2">Degree 2</label>
-                        <input type="text" class="form-control" name="degree2" id="degree2"
-                            placeholder="Enter your degree" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="college2">College 2</label>
-                        <input type="text" class="form-control" name="college2" id="college2"
-                            placeholder="Enter your college" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="year2">Year 2</label>
-                        <input type="text" class="form-control" name="year2" id="year2" placeholder="Enter your year" />
-                    </div>
+<div class="form-section" id="project-section">
+    <h5>Projects</h5>
+    <div id="project-container">
+        <div class="row g-3">
+            <div class="col-md-4"><label>Project Title</label><input type="text" class="form-control" name="project[]" /></div>
+            <div class="col-md-4"><label>Duration</label><input type="text" class="form-control" name="proj_dur[]" /></div>
+            <div class="col-md-4"><label>Description</label><input type="text" class="form-control" name="proj_desc[]" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addProject()">+ Add More </button>
+</div>
 
-                    <div class="col-md-6">
-                        <label for="degree3">Degree 3</label>
-                        <input type="text" class="form-control" name="degree3" id="degree3"
-                            placeholder="Enter your degree" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="college3">College 3</label>
-                        <input type="text" class="form-control" name="college3" id="college3"
-                            placeholder="Enter your college" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="year3">Year 3</label>
-                        <input type="text" class="form-control" name="year3" id="year3" placeholder="Enter your year" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h5>Experience: Tell us about your work experience</h5>
-                <div class="row g-3">
-                    <!-- Experience 1 -->
-                    <div class="col-md-6">
-                        <label for="company1">Company 1</label>
-                        <input type="text" class="form-control" name="company1" id="company1"
-                            placeholder="Enter company name" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="post1">Post</label>
-                        <input type="text" class="form-control" name="post1" id="post1"
-                            placeholder="Enter your job title" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="duration1">Duration</label>
-                        <input type="text" class="form-control" name="duration1" id="duration1"
-                            placeholder="e.g. Jan 2020 - Dec 2021" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lin11">Description</label>
-                        <input type="text" class="form-control" name="lin11" id="lin11"
-                            placeholder="Briefly describe your role" />
-                    </div>
-
-                    <!-- Experience 2 -->
-                    <div class="col-md-6">
-                        <label for="company2">Company 2</label>
-                        <input type="text" class="form-control" name="company2" id="company2"
-                            placeholder="Enter company name" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="post2">Post</label>
-                        <input type="text" class="form-control" name="post2" id="post2"
-                            placeholder="Enter your job title" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="duration2">Duration</label>
-                        <input type="text" class="form-control" name="duration2" id="duration2"
-                            placeholder="e.g. Jan 2019 - Dec 2020" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lin21">Description</label>
-                        <input type="text" class="form-control" name="lin21" id="lin21"
-                            placeholder="Briefly describe your role" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h5>Skills : Tell Us What You’re Great At</h5>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label>skill 1</label>
-                        <input type="text" class="form-control" name="skill1" id="skill1"
-                            placeholder="Enter your skill 1" />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Skill 2</label>
-                        <input type="text" class="form-control" name="skill2" id="skill2"
-                            placeholder="Tell me about skill 2" />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Skill 3</label>
-                        <input type="text" class="form-control" name="skill3" id="skill3"
-                            placeholder="Enter your skill 3" />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Skill 4</label>
-                        <input type="text" class="form-control" name="skill4" id="skill4"
-                            placeholder="Enter your skill 4" />
-                    </div>
-                    <div class="col-md-6">
-                        <label>Skill 5</label>
-                        <input type="text" class="form-control" name="skill5" id="skill5"
-                            placeholder="Enter your phone skill 5" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-section">
-                <h5>Languages: Mention languages you know</h5>
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="lang1" placeholder="Language 1" />
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="lang2" placeholder="Language 2" />
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="lang3" placeholder="Language 3" />
-                    </div>
-                </div>
-            </div>
+           <div class="form-section" id="skills-section">
+    <h5>Skills</h5>
+    <div id="skills-container">
+        <div class="row g-3">
+            <div class="col-md-6"><input type="text" class="form-control" name="skills[]" placeholder="Enter a skill" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addSkill()">+ Add More</button>
+</div>
 
 
-            <div class="form-section">
-                <h5>Projects: Tell us about your projects</h5>
-                <div class="row g-3">
-                    <!-- Project 1 -->
-                    <div class="col-md-6">
-                        <label for="project1">Project 1 Title</label>
-                        <input type="text" class="form-control" name="project1" id="project1"
-                            placeholder="Enter project title" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="durat1">Duration</label>
-                        <input type="text" class="form-control" name="durat1" id="durat1"
-                            placeholder="e.g. Jan 2022 - May 2022" />
-                    </div>
-                    <div class="col-12">
-                        <label for="desc1">Description</label>
-                        <input type="text" class="form-control" name="desc1" id="desc1"
-                            placeholder="Brief description of the project" />
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="col-md-6">
-                        <label for="project2">Project 2 Title</label>
-                        <input type="text" class="form-control" name="project2" id="project2"
-                            placeholder="Enter project title" />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="durat2">Duration</label>
-                        <input type="text" class="form-control" name="durat2" id="durat2"
-                            placeholder="e.g. Jun 2022 - Dec 2022" />
-                    </div>
-                    <div class="col-12">
-                        <label for="desc2">Description</label>
-                        <input type="text" class="form-control" name="desc2" id="desc2"
-                            placeholder="Brief description of the project" />
-                    </div>
-                </div>
-            </div>
 
             
-            <div class="form-section">
-                <h5>Achievements: Mention your top accomplishments</h5>
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="ach1" placeholder="Achievement 1" />
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="ach2" placeholder="Achievement 2" />
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="ach3" placeholder="Achievement 3" />
-                    </div>
-                </div>
-            </div>
+
+            
+    <div class="form-section" id="achievements-section">
+    <h5>Achievements</h5>
+    <div id="ach-container">
+        <div class="row g-3">
+            <div class="col-md-6"><input type="text" class="form-control" name="achievements[]" placeholder="Enter achievement" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addAchievement()">+ Add More </button>
+</div>
+
+<div class="form-section" id="languages-section">
+    <h5>Languages</h5>
+    <div id="lang-container">
+        <div class="row g-3">
+            <div class="col-md-4"><input type="text" class="form-control" name="languages[]" placeholder="Enter a language" /></div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-3" onclick="addLanguage()">+ Add More</button>
+</div>
+
+
 
             <button type="submit" class="btn btn-primary">Generate CV</button>
-            <div class="about-link btn-primary  ">
-                <a href="{% url 'about' %}">📞 About / Contact</a>
-            </div>
+           
         </form>
     </div>
 
+    
+<script>
+function addEducation() {
+    const container = document.getElementById("education-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-4"><input type="text" class="form-control" name="degree[]" placeholder="Degree" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="college[]" placeholder="College" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="year[]" placeholder="Year" /></div>
+    `;
+    container.appendChild(block);
+}
 
-    <!-- <div class="py-5 w-100" style="background-color: #eef4ff; min-height: 100vh;" id="intro-screen">
-        <div class=" d-flex justify-content-center align-items-center">
-            <div class="bg-white rounded-4 shadow  pb-3 text-center" style="max-width: 600px; width: 100%;">
+function addExperience() {
+    const container = document.getElementById("experience-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-4"><input type="text" class="form-control" name="company[]" placeholder="Company" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="post[]" placeholder="Post" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="duration[]" placeholder="Duration" /></div>
+        <div class="col-md-12"><input type="text" class="form-control" name="expdesc[]" placeholder="Description" /></div>
+    `;
+    container.appendChild(block);
+}
 
-                <img src="https://www.mycvcreator.com/app/assets/img/bg.jpg" alt="CV Examples" class="img-fluid  w-100"
-                    style="max-height: 273px; " />
+function addProject() {
+    const container = document.getElementById("project-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-4"><input type="text" class="form-control" name="project[]" placeholder="Project Title" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="proj_dur[]" placeholder="Duration" /></div>
+        <div class="col-md-4"><input type="text" class="form-control" name="proj_desc[]" placeholder="Description" /></div>
+    `;
+    container.appendChild(block);
+}
 
-                <h2 class="fw-bold mb-2 text-primary mt-3">Smart CV</h2>
-                <h4 class="fw-bold mb-3 text-dark">RESUME BUILDER</h4>
-                <p class="mb-4">Build a <span class="fw-bold text-success">job-winning</span> resume in <span
-                        class="fw-bold text-info">minutes</span>.</p>
+function addSkill() {
+    const container = document.getElementById("skills-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-6"><input type="text" class="form-control" name="skills[]" placeholder="Skill" /></div>
+    `;
+    container.appendChild(block);
+}
 
-               
-                <ul class="list-unstyled text-start d-inline-block mb-0 text-dark">
-                    <li class="mb-2"><i class="text-success me-2">✔</i> Resume Templates</li>
-                    <li class="mb-2"><i class="text-success me-2">✔</i> Fast & Easy to Create</li>
-                    <li class="mb-2"><i class="text-success me-2">✔</i> Modern Resume Designs</li>
-                    <li class="mb-2"><i class="text-success me-2">✔</i> Download PDF, Print </li>
-                    <li class="mb-2"><i class="text-success me-2">✔</i> Step by Step Help & Guide</li>
-                </ul>
-                <div></div>
-                <button class="btn btn-primary btn-lg mt-3" onclick="ViewIntroPage()">Start Building</button>
-            </div>
-        </div>
-    </div> -->
+function addAchievement() {
+    const container = document.getElementById("ach-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-6"><input type="text" class="form-control" name="achievements[]" placeholder="Achievement" /></div>
+    `;
+    container.appendChild(block);
+}
 
-
-    <!-- <div class="form-wrapper d-none" id="ResumeForm">
-        <form method="post">
-            {% csrf_token %}
-
-            <div id="PersonalInfo">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">What's the best way for employers to contact you?</h2>
-
-                <p>
-                    We suggest including an email and phone number.
-                </p>
-
-                <div class="section">
-                    <label for="template">Choose Template:</label>
-                    <select name="template" id="template">
-                        <option value="classic">Classic</option>
-                        <option value="modern">Modern</option>
-                        <option value="creative">Creative</option>
-                    </select>
-                </div>
-
-                <div class="section">
-                    <h2>Personal Information</h2>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
-
-                    <label for="about">About</label>
-                    <input type="text" name="about" id="about">
-
-                    <label for="age">Age</label>
-                    <input type="text" name="age" id="age">
-
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email">
-
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone">
-                    <div class="d-flex">
-                        <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextSkill()'>
-                            Next : Skills
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="section d-none mt-4 mb-5" id="Skills">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">Tell Us What You’re Great At</h2>
-
-               
-
-                <div class="inline-group mt-3">
-                    <input type="text" name="skill1" placeholder="Skill 1">
-                    <input type="text" name="skill2" placeholder="Skill 2">
-                    <input type="text" name="skill3" placeholder="Skill 3">
-                    <input type="text" name="skill4" placeholder="Skill 4">
-                    <input type="text" name="skill5" placeholder="Skill 5">
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextEducation()'>
-                        Next : Education
-                    </button>
-                </div>
-            </div>
-
-            <div class="section d-none w-100" id="Education">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">Tell us about your education</h2>
-                <label>Degree 1</label><input type="text" name="degree1">
-                <label>College 1</label><input type="text" name="college1">
-                <label>Year 1</label><input type="text" name="year1">
-                <label>Degree 2</label><input type="text" name="degree2">
-                <label>College 2</label><input type="text" name="college2">
-                <label>Year 2</label><input type="text" name="year2">
-                <label>Degree 3</label><input type="text" name="degree3">
-                <label>College 3</label><input type="text" name="college3">
-                <label>Year 3</label><input type="text" name="year3">
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextLanguages()'>
-                        Next : Languages
-                    </button>
-                </div>
-            </div>
-
-
-            <div class="section d-none" id="Languages">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">What Language would you like to highlight?</h2>
-                <input class="my-3" type="text" name="lang1" placeholder="Language 1">
-                <input class="my-3" type="text" name="lang2" placeholder="Language 2">
-                <input class="my-3" type="text" name="lang3" placeholder="Language 3">
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextProjects()'>
-                        Next : Projects
-                    </button>
-                </div>
-            </div>
-
-            <div class="section d-none" id="Projects">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">Showcasing your work</h2>
-                <label>Project 1 Title</label><input type="text" name="project1">
-                <label>Duration</label><input type="text" name="durat1">
-                <label>Description</label><input type="text" name="desc1">
-                <label>Project 2 Title</label><input type="text" name="project2">
-                <label>Duration</label><input type="text" name="durat2">
-                <label>Description</label><input type="text" name="desc2">
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextExperience()'>
-                        Next : Experience
-                    </button>
-                </div>
-            </div>
-
-            <div class="section d-none" id="Experience">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">Show us your professional journey</h2>
-                <label>Company 1</label><input type="text" name="company1">
-                <label>Post</label><input type="text" name="post1">
-                <label>Duration</label><input type="text" name="duration1">
-                <label>Description</label><input type="text" name="lin11">
-                <label>Company 2</label><input type="text" name="company2">
-                <label>Post</label><input type="text" name="post2">
-                <label>Duration</label><input type="text" name="duration2">
-                <label>Description</label><input type="text" name="lin21">
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-lg mt-3 me-0" type="button" onclick='nextAchievements()'>
-                        Next : Achievements
-                    </button>
-                </div>
-            </div>
-
-            <div class="section d-none" id="Achievements">
-                <h2 style="font-size: 30px;
-                max-width: 88%;
-                font-weight: 600;">Highlight your key achievements</h2>
-                <input class="my-3" type="text" name="ach1" placeholder="Achievement 1">
-                <input class="my-3" type="text" name="ach2" placeholder="Achievement 2">
-                <input class="my-3" type="text" name="ach3" placeholder="Achievement 3">
-                <button class="btn btn-primary btn-lg mt-3 me-0" type="submit">Generate Resume</button>
-                <div class="about-link btn-primary ">
-                    <a href="{% url 'about' %}">📞 About / Contact</a>
-                </div>
-            </div>
-
-        </form>
-
-    </div> -->
-    <script>
-        function ViewIntroPage() {
-            const website = document.getElementById("ResumeForm");
-            const introscreen = document.getElementById("intro-screen");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextSkill() {
-            const website = document.getElementById("Skills");
-            const introscreen = document.getElementById("PersonalInfo");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextEducation() {
-            const website = document.getElementById("Education");
-            const introscreen = document.getElementById("Skills");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextLanguages() {
-            const website = document.getElementById("Languages");
-            const introscreen = document.getElementById("Education");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextProjects() {
-            const website = document.getElementById("Projects");
-            const introscreen = document.getElementById("Languages");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextExperience() {
-            const website = document.getElementById("Experience");
-            const introscreen = document.getElementById("Projects");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-        function nextAchievements() {
-            const website = document.getElementById("Achievements");
-            const introscreen = document.getElementById("Experience");
-            introscreen.classList.add("d-none");
-            website.classList.remove("d-none");
-        }
-    </script>
+function addLanguage() {
+    const container = document.getElementById("lang-container");
+    const block = document.createElement("div");
+    block.classList.add("row", "g-3", "mt-3");
+    block.innerHTML = `
+        <div class="col-md-4"><input type="text" class="form-control" name="languages[]" placeholder="Language" /></div>
+    `;
+    container.appendChild(block);
+}
+</script>
 
 </body>
 

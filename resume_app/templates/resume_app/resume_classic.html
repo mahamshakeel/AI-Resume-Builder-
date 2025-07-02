@@ -8,21 +8,21 @@
 
     <style>
         :root {
+            --primary: #007b83;
             --light-bg: #ffffff;
             --dark-bg: #121212;
             --light-text: #222;
             --dark-text: #f1f1f1;
-            --primary: #007b83;
             --border: #e0e0e0;
         }
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 30px 15px;
             background-color: var(--light-bg);
             color: var(--light-text);
-            transition: all 0.3s ease;
+            margin: 0;
+            padding: 30px 15px;
+            transition: 0.3s ease all;
         }
 
         body[data-theme="dark"] {
@@ -34,9 +34,9 @@
             max-width: 850px;
             margin: auto;
             padding: 30px;
+            background-color: #f9f9f9;
             border: 1px solid var(--border);
             border-radius: 10px;
-            background-color: #f9f9f9;
         }
 
         body[data-theme="dark"] .resume-container {
@@ -46,8 +46,8 @@
 
         h1 {
             font-size: 32px;
-            margin-bottom: 5px;
             color: var(--primary);
+            margin-bottom: 5px;
         }
 
         h2.section-title {
@@ -60,25 +60,17 @@
 
         h3 {
             margin-top: 5px;
-            color: inherit;
             font-weight: normal;
         }
 
-        p, li {
-            font-size: 15px;
-            line-height: 1.6;
-        }
+        ul { padding-left: 20px; }
+        li, p { font-size: 15px; line-height: 1.6; }
 
-        ul {
-            padding-left: 20px;
-        }
+        .info p { margin: 6px 0; }
 
-        .info {
-            margin: 20px 0;
-        }
-
-        .info p {
-            margin: 6px 0;
+        .score-box {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .tools {
@@ -87,28 +79,88 @@
         }
 
         .btn {
-            background-color: var(--primary);
+            background: var(--primary);
             color: #fff;
+            padding: 12px 24px;
             border: none;
-            padding: 10px 18px;
-            border-radius: 5px;
-            margin: 0 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
             cursor: pointer;
-            font-size: 14px;
+            transition: 0.3s ease;
+            margin: 5px;
         }
 
         .btn:hover {
-            background-color: #005f63;
+            transform: scale(1.05);
         }
 
-        .score-box {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+     #settings-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px 25px;
+    width: 260px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
 
-        .score-box p {
-            font-weight: bold;
-        }
+#settings-panel h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #222;
+    text-align: center;
+}
+
+#settings-panel label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+    color: #222;
+}
+
+#settings-panel input[type="color"],
+#settings-panel select {
+    margin-top: 6px;
+    margin-bottom: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+#settings-panel button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#settings-panel button:hover {
+    background-color: #005e63;
+    transform: scale(1.03);
+}
+
     </style>
 </head>
 
@@ -117,94 +169,139 @@
     <div class="score-box">
         <h3>Resume Score: {{ resume_score }}/30</h3>
         {% if resume_score >= 25 %}
-            <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
+        <p style="color: green;">✅ Excellent!</p>
         {% elif resume_score >= 15 %}
-            <p style="color: orange;">⚠️ Good, but can be improved.</p>
+        <p style="color: orange;">⚠️ Good, can improve.</p>
         {% else %}
-            <p style="color: red;">❌ Needs significant improvement.</p>
+        <p style="color: red;">❌ Needs improvement.</p>
         {% endif %}
     </div>
 
+    <!-- 🎨 Customizer -->
+    <div id="settings-panel">
+        <h5>🎨 Customize</h5>
+
+        <label for="primaryColorPicker">Primary Color</label>
+        <input type="color" id="primaryColorPicker" value="#007b83" class="form-control mb-2">
+
+        <label for="fontPicker">Font Style</label>
+        <select id="fontPicker" class="form-control mb-2">
+            <option value="'Segoe UI', sans-serif">Segoe UI</option>
+            <option value="'Poppins', sans-serif">Poppins</option>
+            <option value="'Roboto', sans-serif">Roboto</option>
+            <option value="'Georgia', serif">Georgia</option>
+            <option value="'Courier New', monospace">Courier New</option>
+        </select>
+
+        <button onclick="applyCustomStyle()" class="btn" style="width: 100%;">Apply</button>
+    </div>
+
     <div class="resume-container" id="resume">
-        <h1>{{ name }}</h1>
-        <h3>{{ about }}</h3>
+        {% if name %}<h1>{{ name }}</h1>{% endif %}
+        {% if about %}<h3>{{ about }}</h3>{% endif %}
 
+        {% if email or phone or age %}
         <div class="info">
-            <p><strong>Email:</strong> {{ email }}</p>
-            <p><strong>Phone:</strong> {{ phone }}</p>
-            <p><strong>Age:</strong> {{ age }}</p>
-            <p><strong>Portfolio:</strong> <a href="#" style="color: var(--primary);">yourportfolio.com</a></p>
-            <p><strong>LinkedIn:</strong> <a href="#" style="color: var(--primary);">linkedin.com/in/yourname</a></p>
+            {% if email %}<p><strong>Email:</strong> {{ email }}</p>{% endif %}
+            {% if phone %}<p><strong>Phone:</strong> {{ phone }}</p>{% endif %}
+            {% if age %}<p><strong>Age:</strong> {{ age }}</p>{% endif %}
         </div>
+        {% endif %}
 
+        {% if skills %}
         <h2 class="section-title">Skills</h2>
-        <ul>
-            <li>{{ skill1 }}</li>
-            <li>{{ skill2 }}</li>
-            <li>{{ skill3 }}</li>
-            <li>{{ skill4 }}</li>
-            <li>{{ skill5 }}</li>
-        </ul>
+        <ul>{% for skill in skills %}{% if skill %}<li>{{ skill }}</li>{% endif %}{% endfor %}</ul>
+        {% endif %}
 
+        {% if education %}
         <h2 class="section-title">Education</h2>
         <ul>
-            <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-            <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-            <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
+            {% for degree, college, year in education %}
+            {% if degree or college or year %}
+            <li>{{ degree }} - {{ college }} ({{ year }})</li>
+            {% endif %}
+            {% endfor %}
         </ul>
+        {% endif %}
 
+        {% if languages %}
         <h2 class="section-title">Languages</h2>
-        <ul>
-            <li>{{ lang1 }}</li>
-            <li>{{ lang2 }}</li>
-            <li>{{ lang3 }}</li>
-        </ul>
+        <ul>{% for lang in languages %}{% if lang %}<li>{{ lang }}</li>{% endif %}{% endfor %}</ul>
+        {% endif %}
 
+        {% if projects %}
         <h2 class="section-title">Projects</h2>
         <ul>
-            <li><strong>{{ project1 }}</strong> – {{ durat1 }}<br>{{ desc1 }}</li>
-            <li><strong>{{ project2 }}</strong> – {{ durat2 }}<br>{{ desc2 }}</li>
+            {% for project, dur, desc in projects %}
+            {% if project or dur or desc %}
+            <li><strong>{{ project }}</strong> – {{ dur }}<br>{{ desc }}</li>
+            {% endif %}
+            {% endfor %}
         </ul>
+        {% endif %}
 
+        {% if experience %}
         <h2 class="section-title">Experience</h2>
         <ul>
-            <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-            <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
+            {% for company, post, duration, desc in experience %}
+            {% if company or post or duration or desc %}
+            <li><strong>{{ company }}</strong> – {{ post }} ({{ duration }})<br>{{ desc }}</li>
+            {% endif %}
+            {% endfor %}
         </ul>
+        {% endif %}
 
+        {% if achievements %}
         <h2 class="section-title">Achievements</h2>
-        <ul>
-            <li>{{ ach1 }}</li>
-            <li>{{ ach2 }}</li>
-            <li>{{ ach3 }}</li>
-        </ul>
+        <ul>{% for ach in achievements %}{% if ach %}<li>{{ ach }}</li>{% endif %}{% endfor %}</ul>
+        {% endif %}
     </div>
 
     <div class="tools">
-        <button onclick="generatePDF('resume')" class="btn">📄 Download PDF</button>
+        <button onclick="generatePDF()" class="btn">📄 Download PDF</button>
         <button onclick="toggleTheme()" class="btn">🌓 Toggle Theme</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <!-- Scripts -->
     <script>
-        function generatePDF(containerId) {
-            const element = document.getElementById(containerId);
-            const opt = {
-                margin: 0,
-                filename: 'resume.pdf',
-                image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 4, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
+        let userColor = '#007b83';
+        let userFont = "'Segoe UI', sans-serif";
+
+        function applyCustomStyle() {
+            userColor = document.getElementById("primaryColorPicker").value;
+            userFont = document.getElementById("fontPicker").value;
+
+            document.documentElement.style.setProperty('--primary', userColor);
+            document.body.style.fontFamily = userFont;
+            document.querySelectorAll('h1,h2,h3,p,li').forEach(el => el.style.fontFamily = userFont);
+            document.querySelectorAll('.btn').forEach(btn => btn.style.background = userColor);
         }
 
         function toggleTheme() {
             const body = document.body;
-            const current = body.getAttribute("data-theme");
-            body.setAttribute("data-theme", current === "light" ? "dark" : "light");
+            const theme = body.getAttribute("data-theme");
+            body.setAttribute("data-theme", theme === "light" ? "dark" : "light");
+        }
+
+        function generatePDF() {
+            const resume = document.getElementById("resume");
+            const clone = resume.cloneNode(true);
+
+            clone.style.setProperty('--primary', userColor);
+            clone.style.fontFamily = userFont;
+            clone.style.width = "794px";  // A4 width
+
+            const opt = {
+                margin: 0,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 4, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(clone).save();
         }
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </body>
 </html>

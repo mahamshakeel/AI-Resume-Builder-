@@ -1,255 +1,309 @@
 {% extends 'resume_app/base.html' %}
 
 {% block content %}
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-    :root {
-        --light-bg: linear-gradient(135deg, #ffffff, #e0f7fa);
-        --dark-bg: linear-gradient(135deg, #121212, #2c2c2c);
-        --glass-bg-light: rgba(255, 255, 255, 0.6);
-        --glass-bg-dark: rgba(40, 40, 40, 0.6);
-        --primary: #2a9d8f;
-        --text-light: #333;
-        --text-dark: #eee;
-        --font-main: 'Inter', sans-serif;
-    }
+:root {
+    --light-bg: linear-gradient(135deg, #ffffff, #e0f7fa);
+    --dark-bg: linear-gradient(135deg, #121212, #2c2c2c);
+    --glass-bg-light: rgba(255, 255, 255, 0.6);
+    --glass-bg-dark: rgba(40, 40, 40, 0.6);
+    --primary: #2a9d8f;
+    --text-light: #333;
+    --text-dark: #eee;
+    --font-main: 'Inter', sans-serif;
+}
 
-    body {
-        font-family: var(--font-main);
-        background: var(--light-bg);
-        background-size: 200% 200%;
-        animation: gradientFlow 12s ease infinite;
-        transition: background 0.4s ease;
-    }
+body {
+    font-family: var(--font-main);
+    background: var(--light-bg);
+    background-size: 200% 200%;
+    animation: gradientFlow 12s ease infinite;
+    transition: background 0.4s ease;
+}
 
-    body[data-theme="dark"] .left-column {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        /* deeper blue for dark mode */
-    }
+body[data-theme="dark"] .left-column {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
 
-    @keyframes gradientFlow {
-        0% {
-            background-position: 0% 50%;
-        }
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        50% {
-            background-position: 100% 50%;
-        }
+.container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    color: var(--text-light);
+}
 
-        100% {
-            background-position: 0% 50%;
-        }
-    }
+body[data-theme="dark"] .container {
+    background: var(--glass-bg-dark);
+    color: var(--text-dark);
+}
 
+.left-column {
+    background: linear-gradient(135deg, #3a7bd5, #3a6073);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.left-column h2, .left-column h3 {
+    color: #fff !important;
+}
+
+.right-column h2, .right-column h3 {
+    color: var(--primary) !important;
+}
+
+h2 {
+    font-size: 28px;
+    color: var(--primary);
+}
+
+h3 {
+    margin-top: 15px;
+    font-size: 20px;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+.resume-score {
+    text-align: center;
+
+    padding: 20px;
+ 
+}
+
+body[data-theme="dark"] .resume-score {
+    background: #2b2b2bcc;
+}
+
+.resume-score p {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.btn {
+    background: var(--primary);
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #22786e;
+}
+
+.skill-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 30px;
+    margin: 4px 6px 0 0;
+    font-size: 14px;
+}
+
+#settings-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 240px;
+    z-index: 999;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+#settings-panel h5 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#settings-panel label {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#settings-panel input[type="color"],
+#settings-panel select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 6px;
+}
+
+#settings-panel button {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
     .container {
-        max-width: 1100px;
-        margin: 50px auto;
-        padding: 40px;
-        border-radius: 20px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 30px;
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(20px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        color: var(--text-light);
+        grid-template-columns: 1fr;
     }
-
-    body[data-theme="dark"] .container {
-        background: var(--glass-bg-dark);
-        color: var(--text-dark);
-    }
-
-    .left-column {
-        flex: 1;
-        background: linear-gradient(135deg, #3a7bd5, #3a6073);
-        /* modern bluish gradient */
-        color: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        /* subtle shadow */
-        transition: background 0.3s ease, box-shadow 0.3s ease;
-        color: #fff !important;
-
-    }
-
-    .left-column h2,.left-column h3 {
-        color: #fff !important;
-    }
-    .right-column h2,.right-column h3{
-        color: var(--primary) !important;
-
-    }
-    
-    h2 {
-        font-size: 28px;
-        color: var(--primary);
-    }
-
-    h3 {
-        margin-top: 15px;
-        font-size: 20px;
-        color: var(--primary);
-        border-bottom: 2px solid var(--primary);
-        display: inline-block;
-        padding-bottom: 4px;
-    }
-
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-    }
-
-    li {
-        margin-bottom: 6px;
-    }
-
-    .resume-score {
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .resume-score h2 {
-        font-size: 24px;
-    }
-
-    .btn {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 10px 20px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-    }
-
-    .btn:hover {
-        background: #22786e; 
-    }
-
-    .skill-tag {
-        display: inline-block;
-        background: var(--primary);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 30px;
-        margin: 4px 6px 0 0;
-        font-size: 14px;
-    }
-
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .container {
-            grid-template-columns: 1fr;
-        }
-    }
+}
 </style>
+
+<!-- 🎨 Customization Panel -->
+<div id="settings-panel">
+    <h5>🎨 Customize Resume</h5>
+    <label>Primary Color:</label>
+    <input type="color" id="primaryColorPicker" value="#2a9d8f">
+    <label>Font Style:</label>
+    <select id="fontPicker">
+        <option value="'Inter', sans-serif">Inter</option>
+        <option value="'Roboto', sans-serif">Roboto</option>
+        <option value="'Poppins', sans-serif">Poppins</option>
+        <option value="'Georgia', serif">Georgia</option>
+        <option value="'Courier New', monospace">Courier New</option>
+    </select>
+    <button onclick="applyCustomStyle()">Apply</button>
+</div>
 
 <!-- Resume Score -->
 <div class="resume-score fade-in">
     <h2>Resume Score: {{ resume_score }}/30</h2>
     {% if resume_score >= 25 %}
-    <p style="color: green;">Great! Your resume is highly optimized.</p>
+        <p style="color: green;">✅ Excellent! Your resume is highly optimized.</p>
     {% elif resume_score >= 15 %}
-    <p style="color: orange;">Good. Consider improving keyword use and formatting.</p>
+        <p style="color: orange;">⚠️ Good. Consider improving keyword usage or formatting.</p>
     {% else %}
-    <p style="color: red;">Needs work. Add more relevant content and check formatting.</p>
+        <p style="color: red;">❌ Needs improvement. Add content & structure.</p>
     {% endif %}
 </div>
 
 <!-- Resume Container -->
 <div class="container fade-in" id="resume">
-    <!-- Left Column -->
     <div class="left-column">
+        {% if name %}<h2>{{ name }}</h2>{% endif %}
+        {% if about %}<p>{{ about }}</p>{% endif %}
+
         <div>
-            <h2>{{ name }}</h2>
-            <p>{{ about }}</p>
+            {% if email %}<strong>Email:</strong><br>{{ email }}<br>{% endif %}
+            {% if phone %}<strong>Phone:</strong><br>{{ phone }}<br>{% endif %}
+            {% if age %}<strong>Age:</strong><br>{{ age }}{% endif %}
         </div>
+
+        {% if skills %}
+        <h3>Skills</h3>
         <div>
-            <strong>Email:</strong><br>{{ email }}<br>
-            <strong>Phone:</strong><br>{{ phone }}<br>
-            <strong>Age:</strong><br>{{ age }}
+            {% for skill in skills %}
+                {% if skill %}<span class="skill-tag">{{ skill }}</span>{% endif %}
+            {% endfor %}
         </div>
-        <div>
-            <h3>Skills</h3>
-            <div>
-                <span class="skill-tag">{{ skill1 }}</span>
-                <span class="skill-tag">{{ skill2 }}</span>
-                <span class="skill-tag">{{ skill3 }}</span>
-                <span class="skill-tag">{{ skill4 }}</span>
-                <span class="skill-tag">{{ skill5 }}</span>
-            </div>
-        </div>
-        <div>
-            <h3>Languages</h3>
-            <ul>
-                <li>{{ lang1 }}</li>
-                <li>{{ lang2 }}</li>
-                <li>{{ lang3 }}</li>
-            </ul>
-        </div>
+        {% endif %}
+
+        {% if languages %}
+        <h3>Languages</h3>
+        <ul>
+            {% for lang in languages %}
+                {% if lang %}<li>{{ lang }}</li>{% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
 
-    <!-- Right Column -->
     <div class="right-column">
-        <div>
-            <h3>Education</h3>
-            <ul>
-                <li>{{ degree1 }} - {{ college1 }} ({{ year1 }})</li>
-                <li>{{ degree2 }} - {{ college2 }} ({{ year2 }})</li>
-                <li>{{ degree3 }} - {{ college3 }} ({{ year3 }})</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Projects</h3>
-            <ul>
-                <li><strong>{{ project1 }}</strong> ({{ durat1 }})<br>{{ desc1 }}</li>
-                <li><strong>{{ project2 }}</strong> ({{ durat2 }})<br>{{ desc2 }}</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Experience</h3>
-            <ul>
-                <li><strong>{{ company1 }}</strong> – {{ post1 }} ({{ duration1 }})<br>{{ lin11 }}</li>
-                <li><strong>{{ company2 }}</strong> – {{ post2 }} ({{ duration2 }})<br>{{ lin21 }}</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Achievements</h3>
-            <ul>
-                <li>{{ ach1 }}</li>
-                <li>{{ ach2 }}</li>
-                <li>{{ ach3 }}</li>
-            </ul>
-        </div>
-        <button class="btn" onclick="generatePDF('resume')">Download PDF</button>
+        {% if education %}
+        <h3>Education</h3>
+        <ul>
+            {% for degree, college, year in education %}
+                {% if degree or college or year %}
+                    <li>{{ degree }} - {{ college }} ({{ year }})</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if projects %}
+        <h3>Projects</h3>
+        <ul>
+            {% for title, dur, desc in projects %}
+                {% if title or dur or desc %}
+                    <li><strong>{{ title }}</strong> ({{ dur }})<br>{{ desc }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if experience %}
+        <h3>Experience</h3>
+        <ul>
+            {% for company, post, duration, desc in experience %}
+                {% if company or post or duration or desc %}
+                    <li><strong>{{ company }}</strong> – {{ post }} ({{ duration }})<br>{{ desc }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if achievements %}
+        <h3>Achievements</h3>
+        <ul>
+            {% for ach in achievements %}
+                {% if ach %}<li>{{ ach }}</li>{% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
     </div>
 </div>
 
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <script>
+    function applyCustomStyle() {
+        const primaryColor = document.getElementById("primaryColorPicker").value;
+        const selectedFont = document.getElementById("fontPicker").value;
+        document.documentElement.style.setProperty('--primary', primaryColor);
+        document.body.style.fontFamily = selectedFont;
+
+        document.querySelectorAll('h1,h2,h3,p,li,span').forEach(el => {
+            el.style.fontFamily = selectedFont;
+        });
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.style.background = primaryColor;
+        });
+    }
+
     function generatePDF(containerId) {
-        const element = document.getElementById(containerId);
-        const clone = element.cloneNode(true);
-        clone.style.width = '794px';
-        clone.style.padding = '20px';
+        const element = document.getElementById(containerId).cloneNode(true);
+        element.style.width = '794px';
+        element.style.padding = '20px';
 
         const opt = {
             margin: 0,
@@ -259,13 +313,8 @@
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        html2pdf().set(opt).from(clone).save();
+        html2pdf().set(opt).from(element).save();
     }
 
-    function toggleTheme() {
-        const body = document.body;
-        const theme = body.getAttribute("data-theme");
-        body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
-    }
 </script>
 {% endblock %}
